@@ -8,6 +8,8 @@ all:
   - pi-docs-expert
   - bowser
   - plan-reviewer
+  - flowchart
+  - mermaid
 
 pi-pi full:
   - pi-pi/ext-expert
@@ -25,17 +27,16 @@ meta-team:
   - pi-pi/ext-expert
   - pi-pi/skill-expert
   - pi-pi/agent-expert
-  - pi-pi/prompt-expert
-
-# Research team for web research and information gathering
-research:
-  - researcher
 
 # Scout and research for initial exploration
 scout-research:
   - scout
   - researcher
 
-# Flowchart team for diagram creation
+# Flowchart team for diagram creation (includes PNG generation)
 diagrammers:
   - flowchart
+
+fast-mvp:
+  - builder
+  - reviewer
