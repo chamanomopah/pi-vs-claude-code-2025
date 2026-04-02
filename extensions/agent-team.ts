@@ -250,6 +250,31 @@ export default function (pi: ExtensionAPI) {
 		}
 	}
 
+	function reloadAgents() {
+		if (!widgetCtx) return;
+
+		// Clear existing agent states
+		agentStates.clear();
+
+		// Reload agent definitions and teams from disk
+		loadAgents(widgetCtx.cwd || process.cwd());
+
+		// Re-activate the current team (preserve activeTeamName and activeTeamIndex)
+		if (activeTeamName && teamNames.includes(activeTeamName)) {
+			activateTeam(activeTeamName);
+		} else if (teamNames.length > 0) {
+			// Fallback to first team if current team no longer exists
+			activeTeamIndex = 0;
+			activateTeam(teamNames[0]);
+		}
+
+		// Update the widget
+		updateWidget();
+
+		// Show notification with number of reloaded agents
+		widgetCtx.ui.notify(`Reloaded ${agentStates.size} agent(s)`, "info");
+	}
+
 	// ── Grid Rendering ───────────────────────────
 
 	function renderCard(state: AgentState, colWidth: number, theme: any): string[] {
@@ -676,6 +701,14 @@ export default function (pi: ExtensionAPI) {
 		},
 	});
 
+	pi.registerCommand("agent-team-reload", {
+		description: "Reload agent definitions and teams from disk",
+		handler: async (_args, _ctx) => {
+			widgetCtx = _ctx;
+			reloadAgents();
+		},
+	});
+
 	// ── Keyboard Shortcuts ───────────────────────
 	// NOTE: Shortcuts are now registered in session_start using registerShortcuts()
 	// from .pi/agents/shortcuts.yaml. The old registration below is kept as fallback.
@@ -795,7 +828,8 @@ ${agentCatalog}`,
 			`Team sets loaded from: .pi/agents/teams.yaml\n\n` +
 			`/agents-team          Select a team\n` +
 			`/agents-list          List active agents and status\n` +
-			`/agents-grid <1-6>    Set grid column count`,
+			`/agents-grid <1-6>    Set grid column count\n` +
+			`/agent-team-reload    Reload agents and teams from disk`,
 			"info",
 		);
 		updateWidget();

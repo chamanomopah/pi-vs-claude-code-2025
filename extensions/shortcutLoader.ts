@@ -192,7 +192,12 @@ export function parseShortcutsYaml(raw: string): Map<string, ShortcutMap> {
 		const itemMatch = line.match(/^\s+-\s+(\S+?)(\s+#\s*(.+))?$/);
 		if (itemMatch && currentExtension) {
 			const rawKeyId = itemMatch[1].trim();
-			const actionOrDesc = itemMatch[3]?.trim() || "";
+			let actionOrDesc = itemMatch[3]?.trim() || "";
+			// Extract action name from "action-name (Description)" format
+			const parenIndex = actionOrDesc.indexOf("(");
+			if (parenIndex > 0) {
+			  actionOrDesc = actionOrDesc.substring(0, parenIndex).trim();
+			}
 			const normalizedKeyId = normalizeKeyId(rawKeyId);
 			const validation = validateKeyId(normalizedKeyId);
 			
@@ -256,4 +261,52 @@ export function registerActionShortcuts(
 			try {
 				pi.registerShortcut(keyId, {
 					description: action.description,
-					handle
+					handler: action.handler,
+				});
+				console.log(`[shortcutLoader] ✓ ${keyId} -> ${actionOrDesc}`);
+			} catch (err) {
+				console.error(`[shortcutLoader] ✗ Failed to register ${keyId}: ${err}`);
+			}
+		} else {
+			console.warn(`[shortcutLoader] ⚠ No handler for "${actionOrDesc}" on key "${keyId}"`);
+		}
+	}
+}
+
+/**
+ * Get all shortcuts from .pi/agents/shortcuts.yaml
+ */
+export function getAllShortcuts(cwd: string): Map<string, ShortcutMap> {
+	try {
+		const { readFileSync, existsSync } = require("fs");
+		const { join } = require("path");
+		const shortcutsPath = join(cwd, ".pi", "agents", "shortcuts.yaml");
+		if (!existsSync(shortcutsPath)) return new Map();
+		const raw = readFileSync(shortcutsPath, "utf-8");
+		return parseShortcutsYaml(raw);
+	} catch {
+		return new Map();
+	}
+}
+
+/**
+ * Get detailed information about a shortcut key
+ */
+export function getShortcutInfo(keyId: string): {
+	normalized: string;
+	parts: { modifiers: string[]; baseKey: string };
+	validation: ReturnType<typeof validateKeyId>;
+	kittyInfo: ReturnType<typeof requiresKittyProtocol>;
+} {
+	const normalized = normalizeKeyId(keyId);
+	const parts = normalized.split("+");
+	const modifiers = parts.slice(0, -1);
+	const baseKey = parts[parts.length - 1];
+	
+	return {
+		normalized,
+		parts: { modifiers, baseKey },
+		validation: validateKeyId(normalized),
+		kittyInfo: requiresKittyProtocol(normalized),
+	};
+}

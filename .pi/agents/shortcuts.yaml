@@ -18,7 +18,7 @@
 #         home, end, pageUp, pageDown, up, down, left, right, symbols
 #
 # IMPORTANT: Modifier order doesn't matter!
-#   alt+shift+i = shift+alt+i = alt+shift+i (all normalized to alt+shift+i)
+#   ctrl+shift+a = shift+ctrl+a = ctrl+shift+a (all normalized to ctrl+shift+a)
 #
 # After editing, reload with: /reload
 #
@@ -28,8 +28,9 @@
 # Agent Team Extension (extensions/agent-team.ts)
 # ────────────────────────────────────────────────────────────────────────────────
 agent-team:
-  - f6            # next-team
-  - alt+shift+i   # prev-team (Alt+Shift+I - any modifier order works!)
+  - f6              # next-team (Cycle to next team)
+  - f7     # prev-team (Cycle to previous team)
+  - f5              # agent-team-reload (Reload agent definitions from disk)
 
 # ────────────────────────────────────────────────────────────────────────────────
 # Theme Cycler Extension (extensions/theme-cycler.ts)
@@ -41,5 +42,4 @@ theme-cycler:
 # ────────────────────────────────────────────────────────────────────────────────
 # Shortcut Diagnostic Extension (extensions/shortcut-diagnostic.ts)
 # ────────────────────────────────────────────────────────────────────────────────
-shortcut-diagnostic:
-  - f7       # test-shortcuts (Run diagnostic report)
+# Note: This extension only provides the /test-shortcuts command, no keyboard shortcuts

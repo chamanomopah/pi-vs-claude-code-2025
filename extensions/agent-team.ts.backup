@@ -24,7 +24,7 @@ import { spawn } from "child_process";
 import { readdirSync, readFileSync, existsSync, mkdirSync, unlinkSync } from "fs";
 import { join, resolve } from "path";
 import { applyExtensionDefaults } from "./themeMap.ts";
-
+import { registerActionShortcuts } from "./shortcutLoader.ts";
 // ── Types ────────────────────────────────────────
 
 interface AgentDef {
@@ -677,21 +677,26 @@ export default function (pi: ExtensionAPI) {
 	});
 
 	// ── Keyboard Shortcuts ───────────────────────
+	// NOTE: Shortcuts are now registered in session_start using registerShortcuts()
+	// from .pi/agents/shortcuts.yaml. The old registration below is kept as fallback.
 
-	pi.registerShortcut("f6", {
-		description: "Cycle to next team",
-		handler: async (_ctx) => {
-			cycleTeam(1);
-		},
-	});
+	/*
+	// Fallback: Direct shortcut registration (if YAML loading fails)
 
-	pi.registerShortcut("f7", {
-		description: "Cycle to previous team",
-		handler: async (_ctx) => {
-			cycleTeam(-1);
-		},
-	});
+	 pi.registerShortcut("f6", {
+	 	description: "Cycle to next team",
+	 	handler: async (_ctx) => {
+	 		cycleTeam(1);
+	 	},
+	 });
 
+	 pi.registerShortcut("f7", {
+	 	description: "Cycle to previous team",
+	 	handler: async (_ctx) => {
+	 		cycleTeam(-1);
+	 	},
+	 });
+	*/
 	// ── System Prompt Override ───────────────────
 
 	pi.on("before_agent_start", async (_event, _ctx) => {
@@ -763,6 +768,25 @@ ${agentCatalog}`,
 
 		// Lock down to dispatcher-only (tool already registered at top level)
 		pi.setActiveTools(["dispatch_agent"]);
+
+		// Register shortcuts from .pi/agents/shortcuts.yaml
+		// YAML defines keys (f6, f8), code defines actions (next-team, prev-team)
+		registerActionShortcuts(pi, "agent-team", {
+			"next-team": {
+				description: "Cycle to next team",
+				handler: async (ctx) => {
+					if (!ctx.hasUI) return;
+					cycleTeam(1);
+				},
+			},
+			"prev-team": {
+				description: "Cycle to previous team",
+				handler: async (ctx) => {
+					if (!ctx.hasUI) return;
+					cycleTeam(-1);
+				},
+			},
+		}, _ctx.cwd);
 
 		_ctx.ui.setStatus("agent-team", `Team: ${activeTeamName} (${agentStates.size})`);
 		const members = Array.from(agentStates.values()).map(s => displayName(s.def.name)).join(", ");
