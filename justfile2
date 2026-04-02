@@ -1,0 +1,7 @@
+# Comandos Pi com extensões
+
+# Combo principal: agent-team + minimal + prompt-timer
+pi -e extensions/agent-team.ts -e extensions/minimal.ts -e extensions/prompt-timer.ts
+
+# Combo sem timer: agent-team + minimal
+pi -e extensions/agent-team.ts -e extensions/minimal.ts

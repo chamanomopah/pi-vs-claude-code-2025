@@ -1,0 +1,10 @@
+{
+  "name": "pi-vs-cc",
+  "private": true,
+  "type": "module",
+  "description": "Pi Coding Agent extension playground",
+  "dependencies": {
+    "firecrawl": "^4.18.0",
+    "yaml": "^2.8.0"
+  }
+}

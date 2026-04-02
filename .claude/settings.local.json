@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh pr:*)",
+      "Bash(git fetch:*)",
+      "Bash(git push:*)",
+      "Bash(git remote:*)",
+      "Bash(pi --provider zai --model glm-4.7 \"Olá!\")",
+      "Bash(git init:*)"
+    ]
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "name": "agent-view",
+  "version": "1.1.0",
+  "description": "Real-time visualizer for Pi agents running in parallel with responsive layouts and universal subprocess detection",
+  "main": "index.ts",
+  "author": "Pi Extension Playground",
+  "license": "MIT",
+  "permissions": [
+    "tools",
+    "events",
+    "ui",
+    "commands",
+    "keybindings"
+  ],
+  "dependencies": {
+    "@mariozechner/pi-coding-agent": "*",
+    "@mariozechner/pi-tui": "*",
+    "@mariozechner/pi-ai": "*",
+    "@sinclair/typebox": "^0.31.0"
+  },
+  "flags": [
+    {
+      "name": "agent-view-layout",
+      "description": "Initial layout for agent-view (1x1, 1x2, 1x4, 1x8, list)",
+      "type": "string",
+      "enum": ["1x1", "1x2", "1x4", "1x8", "list"],
+      "default": "1x4"
+    },
+    {
+      "name": "agent-view-font",
+      "description": "Font size for agent-view (small, medium, large)",
+      "type": "string",
+      "enum": ["small", "medium", "large"],
+      "default": "medium"
+    },
+    {
+      "name": "agent-view-mode",
+      "description": "Opening mode for agent-view (auto, manual, never)",
+      "type": "string",
+      "enum": ["auto", "manual", "never"],
+      "default": "auto"
+    }
+  ],
+  "commands": [
+    {
+      "name": "agent-view",
+      "description": "Open/close agent view widget",
+      "aliases": ["av"]
+    },
+    {
+      "name": "agent-view-layout",
+      "description": "Change agent view layout"
+    },
+    {
+      "name": "agent-view-font",
+      "description": "Change agent view font size"
+    },
+    {
+      "name": "agent-view-sort",
+      "description": "Toggle agent sort mode"
+    },
+    {
+      "name": "agent-view-close",
+      "description": "Close agent view widget"
+    }
+  ],
+  "keybindings": [
+    {
+      "key": "ctrl+shift+a",
+      "action": "toggle",
+      "description": "Toggle agent-view widget"
+    },
+    {
+      "key": "ctrl+shift+q",
+      "action": "close",
+      "description": "Close agent-view widget"
+    },
+    {
+      "key": "q",
+      "action": "close",
+      "description": "Close agent-view (when active)"
+    },
+    {
+      "key": "1",
+      "action": "layout-1x1",
+      "description": "Switch to 1x1 layout"
+    },
+    {
+      "key": "2",
+      "action": "layout-1x2",
+      "description": "Switch to 1x2 layout"
+    },
+    {
+      "key": "4",
+      "action": "layout-1x4",
+      "description": "Switch to 1x4 layout"
+    },
+    {
+      "key": "8",
+      "action": "layout-1x8",
+      "description": "Switch to 1x8 layout"
+    },
+    {
+      "key": "s",
+      "action": "font-small",
+      "description": "Set font to small"
+    },
+    {
+      "key": "m",
+      "action": "font-medium",
+      "description": "Set font to medium"
+    },
+    {
+      "key": "l",
+      "action": "font-large",
+      "description": "Set font to large"
+    },
+    {
+      "key": "o",
+      "action": "toggle-sort",
+      "description": "Toggle sort mode (default/active)"
+    }
+  ],
+  "compatible": [
+    "agent-team",
+    "agent-chain",
+    "pi-pi",
+    "subagent-widget",
+    "subagent"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "lastChangelogVersion": "0.63.2",
+  "defaultProvider": "zai",
+  "defaultModel": "glm-4.7",
+  "defaultThinkingLevel": "high",
+  "theme": "dracula"
+}

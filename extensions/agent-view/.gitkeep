@@ -1,0 +1,20 @@
+# Agent View Extension v1.1.0
+
+Extensão Pi para visualização em tempo real de agentes executando em paralelo.
+
+## Uso
+
+pi -e extensions/agent-view/index.ts
+
+## Documentação
+
+- README.md - Documentação completa
+- QUICKSTART.md - Início rápido
+- IMPLEMENTATION.md - Detalhes técnicos
+
+## Arquivos Principais
+
+- index.ts - Registro da extensão, comandos, hooks
+- monitor.ts - AgentMonitor, detecção universal
+- widget.ts - Componentes TUI, layouts
+- manifest.json - Metadados da extensão

@@ -1,0 +1,45 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# Pi Extension Keyboard Shortcuts
+# ═══════════════════════════════════════════════════════════════════════════════
+# 
+# This file defines keyboard shortcuts for Pi extensions.
+# 
+# Format:
+#   extension-name:
+#     - keyId    # action-name (Description)
+#     - keyId    # another-action
+#
+# The comment after keyId is the ACTION NAME that must match a handler
+# defined in the extension code. If no action matches, the shortcut is not registered.
+#
+# Key ID Format: modifier+key (lowercase)
+#   Modifiers: ctrl, shift, alt (combinable: ctrl+shift+x)
+#   Keys: a-z, 0-9, f1-f12, escape, enter, tab, space, backspace, delete,
+#         home, end, pageUp, pageDown, up, down, left, right, symbols
+#
+# IMPORTANT: Modifier order doesn't matter!
+#   alt+shift+i = shift+alt+i = alt+shift+i (all normalized to alt+shift+i)
+#
+# After editing, reload with: /reload
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ────────────────────────────────────────────────────────────────────────────────
+# Agent Team Extension (extensions/agent-team.ts)
+# ────────────────────────────────────────────────────────────────────────────────
+agent-team:
+  - f6            # next-team
+  - alt+shift+i   # prev-team (Alt+Shift+I - any modifier order works!)
+
+# ────────────────────────────────────────────────────────────────────────────────
+# Theme Cycler Extension (extensions/theme-cycler.ts)
+# ────────────────────────────────────────────────────────────────────────────────
+theme-cycler:
+  - ctrl+x   # next-theme
+  - ctrl+q   # prev-theme
+
+# ────────────────────────────────────────────────────────────────────────────────
+# Shortcut Diagnostic Extension (extensions/shortcut-diagnostic.ts)
+# ────────────────────────────────────────────────────────────────────────────────
+shortcut-diagnostic:
+  - f7       # test-shortcuts (Run diagnostic report)

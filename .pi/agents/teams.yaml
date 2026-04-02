@@ -1,0 +1,52 @@
+all:
+  - scout
+  - planner
+  - builder
+  - reviewer
+  - documenter
+  - red-team
+  - pi-docs-expert
+  - bowser
+  - plan-reviewer
+
+plan-build:
+  - planner
+  - builder
+  - reviewer
+
+info:
+  - scout
+  - documenter
+  - reviewer
+
+frontend:
+  - planner
+  - builder
+  - bowser
+
+pi-pi:
+  - pi-pi/ext-expert
+  - pi-pi/theme-expert
+  - pi-pi/skill-expert
+  - pi-pi/config-expert
+  - pi-pi/tui-expert
+  - pi-pi/prompt-expert
+  - pi-pi/agent-expert
+  - pi-pi/cli-expert
+  - pi-pi/keybinding-expert
+  - pi-pi/pi-orchestrator
+
+# Research team for web research and information gathering
+research:
+  - researcher
+
+# Full research and documentation pipeline
+research-docs:
+  - researcher
+  - documenter
+  - reviewer
+
+# Scout and research for initial exploration
+scout-research:
+  - scout
+  - researcher
