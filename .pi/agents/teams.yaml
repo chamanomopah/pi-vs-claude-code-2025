@@ -9,24 +9,7 @@ all:
   - bowser
   - plan-reviewer
 
-plan-build:
-  - planner
-  - builder
-  - reviewer
-
-
-
-info:
-  - scout
-  - documenter
-  - reviewer
-
-frontend:
-  - planner
-  - builder
-  - bowser
-
-pi-pi:
+pi-pi full:
   - pi-pi/ext-expert
   - pi-pi/theme-expert
   - pi-pi/skill-expert
@@ -38,17 +21,21 @@ pi-pi:
   - pi-pi/keybinding-expert
   - pi-pi/pi-orchestrator
 
+meta-team:
+  - pi-pi/ext-expert
+  - pi-pi/skill-expert
+  - pi-pi/agent-expert
+  - pi-pi/prompt-expert
+
 # Research team for web research and information gathering
 research:
   - researcher
-
-# Full research and documentation pipeline
-research-docs:
-  - researcher
-  - documenter
-  - reviewer
 
 # Scout and research for initial exploration
 scout-research:
   - scout
   - researcher
+
+# Flowchart team for diagram creation
+diagrammers:
+  - flowchart
