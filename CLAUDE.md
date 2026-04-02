@@ -12,6 +12,7 @@ Pi Coding Agent extension examples and experiments.
 - `specs/` — Feature specifications
 - `.pi/agents/` — Agent definitions for agent-team extension
 - `.pi/agent-sessions/` — Ephemeral session files (gitignored)
+- `agent teams` (.pi/agents/teams.yaml) + (extensions/agent-team.ts)
 
 ## Conventions
 - Extensions are standalone .ts files loaded by Pi's jiti runtime
