@@ -1,26 +1,46 @@
 /**
  * Image Gallery Extension
- * 
+ *
  * Features:
  * 1. Widget no terminal mostrando a imagem atual
  * 2. Tool para agentes atualizarem o caminho da imagem
  * 3. Histórico de versões armazenado em session entries
- * 
+ * 4. Visualização de imagem com renderização (terminal suportado)
+ *
  * Usage:
  *   - Agent: "Show image at /path/to/image.png"
- *   - Command: /gallery [next|prev|n|p]
+ *   - Command: /gallery [next|prev|n|p|view]
  *   - Shortcuts: Ctrl+Alt+Right (next), Ctrl+Alt+Left (prev)
  */
 
 import type { ExtensionAPI, ExtensionContext, Theme } from "@mariozechner/pi-coding-agent";
-import { Text } from "@mariozechner/pi-tui";
+import { Container, Image, Key, matchesKey, Spacer, Text } from "@mariozechner/pi-tui";
 import { Type } from "@sinclair/typebox";
+import { readFileSync } from "node:fs";
 
 interface ImageDetails {
 	imagePath: string | null;
 	history: string[];
 	position: number;
 	timestamp: number;
+}
+
+function imageToBase64(path: string): { data: string; mimeType: string } | null {
+	try {
+		const buffer = readFileSync(path);
+		const base64 = buffer.toString("base64");
+		const ext = path.split(".").pop()?.toLowerCase();
+		const mimeTypes: Record<string, string> = {
+			png: "image/png",
+			jpg: "image/jpeg",
+			jpeg: "image/jpeg",
+			gif: "image/gif",
+			webp: "image/webp"
+		};
+		return { data: base64, mimeType: mimeTypes[ext || "png"] || "image/png" };
+	} catch {
+		return null;
+	}
 }
 
 const GalleryParams = Type.Object({
@@ -153,6 +173,30 @@ export default function imageGalleryExtension(pi: ExtensionAPI) {
 					};
 				}
 
+				case "view": {
+					if (!currentPath) {
+						return {
+							content: [{ type: "text", text: "No image to view. Use 'show' action first" }],
+							details: { imagePath: currentPath, history: [...history], position, timestamp: Date.now() } as ImageDetails,
+						};
+					}
+
+					const imageData = imageToBase64(currentPath);
+					if (!imageData) {
+						return {
+							content: [{ type: "text", text: `Error: Could not read image file: ${currentPath}` }],
+							details: { imagePath: currentPath, history: [...history], position, timestamp: Date.now() } as ImageDetails,
+						};
+					}
+
+					return {
+						content: [
+							{ type: "text", text: `Displaying: ${currentPath}` }
+						],
+						details: { imagePath: currentPath, history: [...history], position, timestamp: Date.now() } as ImageDetails,
+					};
+				}
+
 				default:
 					return {
 						content: [{ type: "text", text: `Unknown action: ${params.action}. Use: show, next, or prev` }],
@@ -199,20 +243,20 @@ export default function imageGalleryExtension(pi: ExtensionAPI) {
 	});
 
 	pi.registerCommand("gallery", {
-		description: "Navigate image gallery history. Usage: /gallery [next|prev|n|p]",
+		description: "Navigate image gallery history. Usage: /gallery [next|prev|n|p|view]",
 		handler: async (args, ctx) => {
 			if (!ctx.hasUI) {
 				ctx.ui.notify("Gallery requires interactive mode", "error");
 				return;
 			}
 
-			if (history.length === 0) {
+			if (history.length === 0 && args?.toLowerCase() !== "view") {
 				ctx.ui.notify("No images in history. Use gallery tool first", "warning");
 				return;
 			}
 
 			const action = args?.toLowerCase().trim();
-			
+
 			if (action === "next" || action === "n") {
 				if (position < history.length - 1) {
 					position++;
@@ -231,13 +275,57 @@ export default function imageGalleryExtension(pi: ExtensionAPI) {
 				} else {
 					ctx.ui.notify("No previous images in history", "warning");
 				}
+			} else if (action === "view") {
+				if (!currentPath) {
+					ctx.ui.notify("No image to view. Use gallery tool first", "warning");
+					return;
+				}
+				const imageData = imageToBase64(currentPath);
+				if (!imageData) {
+					ctx.ui.notify("Could not read image: " + currentPath, "error");
+					return;
+				}
+
+				// Use ctx.ui.custom with proper callback signature
+				ctx.ui.custom((tui, theme, _keybindings, done) => {
+					const container = new Container();
+
+					// Title
+					container.addChild(new Text(theme.fg("accent", theme.bold("🖼️  Image Viewer")), 1, 0));
+					container.addChild(new Spacer(1));
+
+					// Image
+					const image = new Image(
+						imageData.data,
+						imageData.mimeType,
+						theme,
+						{ maxWidthCells: 80, maxHeightCells: 25 }
+					);
+					container.addChild(image);
+
+					container.addChild(new Spacer(1));
+
+					// Footer instructions
+					container.addChild(new Text(theme.fg("dim", currentPath!), 1, 0));
+					container.addChild(new Text(theme.fg("muted", "Press ESC to close"), 1, 0));
+
+					return {
+						render: (width) => container.render(width),
+						invalidate: () => container.invalidate(),
+						handleInput: (data) => {
+							if (matchesKey(data, Key.escape)) {
+								done(null);
+							}
+						},
+					};
+				});
 			} else if (action === "" || action === undefined) {
-				const info = currentPath 
+				const info = currentPath
 					? "Current: " + currentPath + " [" + (position + 1) + "/" + history.length + "]"
 					: "No image";
 				ctx.ui.notify(info, "info");
 			} else {
-				ctx.ui.notify("Usage: /gallery [next|prev|n|p]", "warning");
+				ctx.ui.notify("Usage: /gallery [next|prev|n|p|view]", "warning");
 			}
 		},
 	});
