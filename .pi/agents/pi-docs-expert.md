@@ -1,7 +1,7 @@
 ---
 name: pi-docs-expert
 description: Pi documentation specialist with knowledge of all Pi docs (extensions, TUI, skills, themes, sessions, keybindings, models, providers, SDK, RPC, etc). Knows preview of each file and accesses specific docs when needed.
-tools: read,grep,find,ls
+tools: read,grep,find,ls,write
 color: cyan
 ---
 

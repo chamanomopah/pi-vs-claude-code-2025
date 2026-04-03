@@ -37,5 +37,8 @@ scout-research:
 diagrammers:
   - flowchart
 
-fast-mvp:
-  - builder
+fast-pi-mvp:
+  - researcher
+  - pi-docs-expert
+  - planner
+  - flowchart
