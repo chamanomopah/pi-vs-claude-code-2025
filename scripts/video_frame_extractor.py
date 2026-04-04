@@ -1,35 +1,28 @@
 #!/usr/bin/env python3
 """
-Extrator de Frames de Vídeo
-============================
-Script simples para extrair frames de um vídeo a cada segundo.
-Usa OpenCV para processamento de vídeo.
+Video Frame Extractor
+A simple script to extract frames from videos at 1-second intervals.
 
-Autor: Script de 5 minutos
-Data: 2026-04-04
+Usage:
+    python video_frame_extractor.py "https://www.youtube.com/watch?v=VIDEO_ID"
+    python video_frame_extractor.py "file:///C:/Users/JOSE/Videos/video.mp4"
+    python video_frame_extractor.py "C:/Videos/video.mp4"
 """
 
 import cv2
 import os
 import re
+import sys
+import argparse
 from pathlib import Path
 from urllib.parse import urlparse
 
-# ==============================================================================
-# CONFIGURAÇÃO - Edite esta variável com a URL do seu vídeo
-# ==============================================================================
-# Exemplo com arquivo local (caminho direto):
-VIDEO_URL = "teste_video.mp4"
+# Fix encoding for Windows console
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
-# Exemplo com arquivo local (formato file:///):
-# VIDEO_URL = "file:///C:/Users/JOSE/.claude/.IMPLEMENTATION/projects/B-software/H-minimum-orquestration/pi-vs-claude-code/scripts/teste_video.mp4"
-
-# Exemplo com URL remota (YouTube):
-# VIDEO_URL = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-
-# ==============================================================================
-# FUNÇÕES AUXILIARES
-# ==============================================================================
 
 def limpar_nome_arquivo(nome: str) -> str:
     """
@@ -136,44 +129,135 @@ def criar_pasta_saida(id_video: str) -> Path:
     return pasta_saida
 
 
-def baixar_video(url: str) -> str:
+def baixar_video(url: str, verbose: bool = False) -> str:
     """
     Baixa o vídeo usando yt-dlp (para URLs do YouTube, etc).
     
     Args:
         url: URL do vídeo
+        verbose: Se True, mostra saida detalhada do yt-dlp
         
     Returns:
         Caminho do arquivo baixado
     """
     print("Baixando video...")
+    print(f"URL: {url}")
+    print()
     
     # Usa yt-dlp se disponível
     import subprocess
     
+    # Limpa arquivos temporários anteriores
+    for arquivo in os.listdir('.'):
+        if arquivo.startswith('video_temp.'):
+            try:
+                os.remove(arquivo)
+                print(f"[DEBUG] Removido arquivo temporario anterior: {arquivo}")
+            except Exception as e:
+                print(f"[DEBUG] Aviso: nao foi possivel remover {arquivo}: {e}")
+    
+    # Comando yt-dlp com opções melhoradas
+    comando = [
+        'yt-dlp',
+        '-f', 'best[ext=mp4]/best',  # Prefere MP4, mas aceita o melhor disponível
+        '-o', 'video_temp.%(ext)s',
+        '--no-playlist',  # Não baixa playlists
+        '--no-warnings',  # Suprime avisos na saída normal
+    ]
+    
+    # Adiciona verbose se solicitado
+    if verbose:
+        comando.append('--verbose')
+        print("[DEBUG] Modo verbose ativado")
+        print(f"[DEBUG] Comando: {' '.join(comando)}")
+        print()
+    
     try:
+        print(f"[INFO] Executando yt-dlp...")
+        
         resultado = subprocess.run(
-            ['yt-dlp', '-f', 'best', '-o', 'video_temp.%(ext)s', url],
+            comando + [url],
             capture_output=True,
             text=True,
-            check=True
+            check=False  # Vamos verificar o resultado manualmente
         )
         
+        # Mostra stdout se houver (informações úteis)
+        if resultado.stdout and verbose:
+            print("[STDOUT] yt-dlp output:")
+            print(resultado.stdout)
+            print()
+        
+        # Mostra stderr se houver erros ou avisos
+        if resultado.stderr:
+            # Filtra apenas linhas importantes do stderr
+            stderr_lines = resultado.stderr.strip().split('\n')
+            erros_importantes = [
+                line for line in stderr_lines
+                if any(keyword in line.lower() for keyword in [
+                    'error', 'failed', 'corrupt', 'unavailable',
+                    'copyright', 'private', 'not found', 'forbidden'
+                ]) or line.strip().startswith('ERROR')
+            ]
+            
+            if erros_importantes:
+                print("[STDERR] Erros detectados:")
+                for erro in erros_importantes:
+                    print(f"  {erro}")
+                print()
+        
+        # Verifica se o comando foi bem-sucedido
+        if resultado.returncode != 0:
+            print(f"[ERRO] yt-dlp retornou codigo {resultado.returncode}")
+            print()
+            print("Detalhes do erro:")
+            if resultado.stderr:
+                print(resultado.stderr)
+            else:
+                print("(sem detalhes disponíveis)")
+            print()
+            print("Possiveis soluções:")
+            print("  1. Verifique se a URL está correta")
+            print("  2. Verifique se o vídeo está disponível")
+            print("  3. Tente atualizar o yt-dlp: pip install --upgrade yt-dlp")
+            print("  4. Se o vídeo é privado, use yt-dlp com cookies")
+            raise Exception(f"yt-dlp falhou com código {resultado.returncode}")
+        
         # Encontra o arquivo baixado
+        print("[INFO] Buscando arquivo baixado...")
+        arquivos_encontrados = []
         for arquivo in os.listdir('.'):
             if arquivo.startswith('video_temp.'):
-                print(f"Video baixado: {arquivo}")
-                return arquivo
+                # Verifica se é um arquivo de vídeo válido
+                if os.path.isfile(arquivo):
+                    tamanho = os.path.getsize(arquivo)
+                    print(f"[INFO] Arquivo encontrado: {arquivo} ({tamanho} bytes)")
+                    if tamanho > 1000:  # Pelo menos 1KB
+                        arquivos_encontrados.append(arquivo)
+                    else:
+                        print(f"[AVISO] Arquivo muito pequeno, pode estar corrompido")
         
-    except subprocess.CalledProcessError as e:
-        print(f"Erro ao baixar video: {e}")
-        print("Dica: Instale yt-dlp com: pip install yt-dlp")
-        raise
+        if not arquivos_encontrados:
+            raise Exception("Nenhum arquivo de vídeo foi baixado (ou arquivo muito pequeno)")
+        
+        # Retorna o maior arquivo encontrado
+        arquivo_final = max(arquivos_encontrados, key=lambda f: os.path.getsize(f))
+        print(f"[SUCESSO] Video baixado: {arquivo_final}")
+        return arquivo_final
+        
     except FileNotFoundError:
-        print("yt-dlp nao encontrado. Instale com: pip install yt-dlp")
-        raise
+        print("[ERRO] yt-dlp nao encontrado no sistema")
+        print()
+        print("Para instalar o yt-dlp, execute:")
+        print("  pip install yt-dlp")
+        print()
+        print("Ou no Linux:")
+        print("  sudo apt install yt-dlp")
+        raise Exception("yt-dlp não encontrado. Instale com: pip install yt-dlp")
     
-    raise Exception("Nao foi possivel encontrar o video baixado")
+    except Exception as e:
+        print(f"[ERRO] Excecao ao baixar video: {e}")
+        raise
 
 
 def extrair_frames(caminho_video: str, pasta_saida: Path) -> int:
@@ -193,7 +277,7 @@ def extrair_frames(caminho_video: str, pasta_saida: Path) -> int:
     captura = cv2.VideoCapture(caminho_video)
     
     if not captura.isOpened():
-        raise Exception("Não foi possível abrir o arquivo de vídeo")
+        raise Exception("Nao foi possivel abrir o arquivo de video")
     
     # Obtém propriedades do vídeo
     fps = captura.get(cv2.CAP_PROP_FPS)
@@ -246,18 +330,38 @@ def limpar_arquivo_temporario(caminho: str):
         print(f"Arquivo temporario removido: {caminho}")
 
 
-# ==============================================================================
-# FLUXO PRINCIPAL
-# ==============================================================================
-
 def main():
-    """Função principal do script."""
-    import sys
+    parser = argparse.ArgumentParser(
+        description='Extract frames from videos at 1-second intervals',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  python video_frame_extractor.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  python video_frame_extractor.py "file:///C:/Users/JOSE/Videos/video.mp4"
+  python video_frame_extractor.py "C:/Videos/video.mp4"
+  python video_frame_extractor.py "/home/user/videos/video.mp4"
+        """
+    )
     
-    # Configura encoding para Windows
-    if sys.platform == 'win32':
-        import io
-        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    parser.add_argument('url', help='Video URL or file path (supports: http/https, file:///, local paths)')
+    parser.add_argument('-o', '--output', help='Output folder name (default: auto-generated based on video ID)')
+    parser.add_argument('-f', '--fps', type=int, default=1,
+                        help='Frames per second to extract (default: 1)')
+    parser.add_argument('-v', '--verbose', action='store_true',
+                        help='Enable verbose output (show yt-dlp details)')
+    parser.add_argument('--debug', action='store_true',
+                        help='Enable debug mode (more detailed error messages)')
+    
+    args = parser.parse_args()
+    
+    # Ativa modo debug se solicitado
+    if args.debug:
+        print("[DEBUG] Modo debug ativado")
+        print(f"[DEBUG] URL: {args.url}")
+        print(f"[DEBUG] Output: {args.output}")
+        print(f"[DEBUG] FPS: {args.fps}")
+        print(f"[DEBUG] Verbose: {args.verbose}")
+        print()
     
     print("=" * 60)
     print("  EXTRATOR DE FRAMES DE VIDEO")
@@ -265,12 +369,12 @@ def main():
     print()
     
     # 1. Detecta o tipo de URL
-    is_file_url = VIDEO_URL.startswith('file:///')
-    is_remote_url = VIDEO_URL.startswith(('http://', 'https://'))
+    is_file_url = args.url.startswith('file:///')
+    is_remote_url = args.url.startswith(('http://', 'https://'))
     is_local_path = not is_file_url and not is_remote_url
     
     # 2. Extrai identificador do vídeo
-    id_video = extrair_id_video(VIDEO_URL)
+    id_video = extrair_id_video(args.url)
     print(f"ID do video: {id_video}")
     
     # Mostra informações sobre o tipo de entrada
@@ -293,18 +397,18 @@ def main():
         if is_remote_url:
             # Baixa o vídeo de URL remota
             print("Video remoto detectado, baixando...")
-            video_file = baixar_video(VIDEO_URL)
+            video_file = baixar_video(args.url, verbose=args.verbose or args.debug)
         elif is_file_url:
             # Converte file:/// para caminho do sistema
-            video_file = converter_file_url_to_path(VIDEO_URL)
+            video_file = converter_file_url_to_path(args.url)
             print(f"Caminho convertido: {video_file}")
             if not os.path.exists(video_file):
-                raise FileNotFoundError(f"Arquivo não encontrado: {video_file}")
+                raise FileNotFoundError(f"Arquivo nao encontrado: {video_file}")
         else:
             # Usa caminho local diretamente
-            video_file = VIDEO_URL
+            video_file = args.url
             if not os.path.exists(video_file):
-                raise FileNotFoundError(f"Arquivo não encontrado: {video_file}")
+                raise FileNotFoundError(f"Arquivo nao encontrado: {video_file}")
         
         print()
         
@@ -334,4 +438,4 @@ def main():
 
 
 if __name__ == "__main__":
-    exit(main())
+    sys.exit(main())

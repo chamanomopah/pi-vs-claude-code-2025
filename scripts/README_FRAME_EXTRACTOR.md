@@ -15,30 +15,52 @@ Script Python simples para extrair frames de vídeos a cada segundo.
 pip install -r requirements.txt
 ```
 
-Ou execute diretamente os scripts de atalho:
-
-- **Windows**: `run_frame_extractor.bat`
-- **Linux/Mac**: `./run_frame_extractor.sh`
-
 ## 🎬 Como Usar
 
-### 1. Edite a URL do Vídeo
-
-Abra o arquivo `video_frame_extractor.py` e altere a variável `VIDEO_URL` no início do arquivo:
-
-```python
-# Para vídeo do YouTube
-VIDEO_URL = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-
-# Para arquivo local
-VIDEO_URL = "C:/Videos/meu_video.mp4"
-```
-
-### 2. Execute o Script
+### Uso Básico
 
 ```bash
-python video_frame_extractor.py
+python video_frame_extractor.py "URL_OU_CAMINHO"
 ```
+
+### Exemplos
+
+```bash
+# URL do YouTube (baixa automaticamente)
+python video_frame_extractor.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+
+# Arquivo local com formato file:///
+python video_frame_extractor.py "file:///C:/Users/JOSE/Videos/meu_video.mp4"
+
+# Arquivo local com caminho direto (Windows)
+python video_frame_extractor.py "C:/Videos/meu_video.mp4"
+
+# Arquivo local com caminho direto (Linux/Mac)
+python video_frame_extractor.py "/home/user/videos/meu_video.mp4"
+```
+
+### Opções da Linha de Comando
+
+```bash
+python video_frame_extractor.py --help
+```
+
+| Opção | Descrição |
+|-------|-----------|
+| `url` | URL ou caminho do vídeo (obrigatório) |
+| `-o, --output` | Nome da pasta de saída (opcional) |
+| `-f, --fps` | Frames por segundo para extrair (padrão: 1) |
+
+### Formatos Suportados
+
+| Formato | Exemplo | Descrição |
+|---------|---------|-----------|
+| URL Remota | `https://www.youtube.com/watch?v=XXXXX` | Baixa o vídeo automaticamente |
+| file:/// (Windows) | `file:///C:/Videos/meu_video.mp4` | Arquivo local no Windows |
+| file:/// (Linux/Mac) | `file:///home/user/videos/meu_video.mp4` | Arquivo local no Linux/Mac |
+| Caminho direto | `C:/Videos/meu_video.mp4` | Caminho direto do arquivo |
+
+**Nota:** O formato `file:///` é útil para manter consistência com URLs e é compatível com muitas ferramentas que geram caminhos neste formato.
 
 ## 📁 Estrutura de Saída
 
@@ -59,11 +81,13 @@ frames/
 ## ⚙️ Funcionalidades
 
 - ✅ Suporta URLs do YouTube e outras plataformas (via yt-dlp)
-- ✅ Suporta arquivos de vídeo locais
-- ✅ Extrai 1 frame por segundo
+- ✅ Suporta arquivos de vídeo locais (caminho direto ou file:///)
+- ✅ Extrai 1 frame por segundo (configurável via `-f`)
 - ✅ Cria pasta automática com base no ID do vídeo
 - ✅ Nomes de arquivo com timestamp em segundos
 - ✅ Limpeza automática de arquivos temporários
+- ✅ Detecção automática do tipo de entrada (URL/file://:/local)
+- ✅ Interface de linha de comando compatível com padrão Unix
 
 ## 🔧 Personalização
 
