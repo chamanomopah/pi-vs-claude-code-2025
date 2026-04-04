@@ -1,0 +1,337 @@
+#!/usr/bin/env python3
+"""
+Extrator de Frames de Vídeo
+============================
+Script simples para extrair frames de um vídeo a cada segundo.
+Usa OpenCV para processamento de vídeo.
+
+Autor: Script de 5 minutos
+Data: 2026-04-04
+"""
+
+import cv2
+import os
+import re
+from pathlib import Path
+from urllib.parse import urlparse
+
+# ==============================================================================
+# CONFIGURAÇÃO - Edite esta variável com a URL do seu vídeo
+# ==============================================================================
+# Exemplo com arquivo local (caminho direto):
+VIDEO_URL = "teste_video.mp4"
+
+# Exemplo com arquivo local (formato file:///):
+# VIDEO_URL = "file:///C:/Users/JOSE/.claude/.IMPLEMENTATION/projects/B-software/H-minimum-orquestration/pi-vs-claude-code/scripts/teste_video.mp4"
+
+# Exemplo com URL remota (YouTube):
+# VIDEO_URL = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+
+# ==============================================================================
+# FUNÇÕES AUXILIARES
+# ==============================================================================
+
+def limpar_nome_arquivo(nome: str) -> str:
+    """
+    Remove caracteres inválidos de nomes de arquivo.
+    
+    Args:
+        nome: String com o nome original
+        
+    Returns:
+        String com nome limpo (apenas caracteres seguros)
+    """
+    # Remove caracteres especiais e mantém apenas alfanuméricos, hífens e underscores
+    nome_limpo = re.sub(r'[<>:"/\\|?*]', '', nome)
+    # Remove espaços extras
+    nome_limpo = nome_limpo.strip().replace(' ', '_')
+    # Limita tamanho do nome
+    return nome_limpo[:50] if len(nome_limpo) > 50 else nome_limpo
+
+
+def converter_file_url_to_path(url: str) -> str:
+    """
+    Converte URLs no formato file:/// para caminhos do sistema de arquivos.
+    
+    Suporta:
+    - file:///c:/path/file.mp4 -> c:\\path\\file.mp4 (Windows)
+    - file:///C:/path/file.mp4 -> C:\\path\\file.mp4 (Windows)
+    - file:///home/user/file.mp4 -> /home/user/file.mp4 (Linux/Mac)
+    
+    Args:
+        url: URL no formato file:///
+        
+    Returns:
+        Caminho do arquivo no formato do sistema operacional
+    """
+    if not url.startswith('file:///'):
+        return url
+    
+    # Remove o prefixo file:///
+    path = url[8:]  # Remove 'file:///'
+    
+    # No Windows, o caminho começa com a letra da unidade (ex: C:/)
+    # No Linux/Mac, o caminho começa com /
+    
+    # Verifica se é caminho do Windows (tem letra seguida de :)
+    if len(path) >= 2 and path[1] == ':':
+        # Windows: C:/path -> C:\\path
+        # OpenCV aceita ambos os formatos no Windows, mas vamos normalizar
+        return path.replace('/', '\\')
+    else:
+        # Linux/Mac: /home/user/path (precisa manter a barra inicial)
+        # O URL já tem a barra, então retornamos como está
+        return '/' + path if not path.startswith('/') else path
+
+
+def extrair_id_video(url: str) -> str:
+    """
+    Extrai um identificador único do vídeo da URL.
+    Funciona com URLs do YouTube, file:///, e caminhos locais.
+    
+    Args:
+        url: URL ou caminho do vídeo
+        
+    Returns:
+        String com identificador único
+    """
+    # Tenta extrair ID do YouTube
+    if 'youtube.com' in url or 'youtu.be' in url:
+        if 'v=' in url:
+            return url.split('v=')[1].split('&')[0]
+        elif 'youtu.be/' in url:
+            return url.split('youtu.be/')[1].split('?')[0]
+    
+    # Para arquivos locais ou outras URLs, usa o nome do arquivo
+    # Primeiro converte file:/// para caminho normal, se necessário
+    caminho = converter_file_url_to_path(url)
+    
+    # Extrai o nome do arquivo do caminho
+    if '/' in caminho or '\\' in caminho:
+        nome_arquivo = os.path.basename(caminho)
+    else:
+        nome_arquivo = caminho
+    
+    return limpar_nome_arquivo(nome_arquivo) if nome_arquivo else "video_desconhecido"
+
+
+def criar_pasta_saida(id_video: str) -> Path:
+    """
+    Cria uma pasta específica para os frames do vídeo.
+    
+    Args:
+        id_video: Identificador único do vídeo
+        
+    Returns:
+        Path object da pasta criada
+    """
+    # Cria pasta na estrutura: frames/<id_video>/
+    pasta_base = Path("frames")
+    pasta_base.mkdir(exist_ok=True)
+    
+    pasta_saida = pasta_base / id_video
+    pasta_saida.mkdir(exist_ok=True)
+    
+    print(f"Pasta criada: {pasta_saida.absolute()}")
+    return pasta_saida
+
+
+def baixar_video(url: str) -> str:
+    """
+    Baixa o vídeo usando yt-dlp (para URLs do YouTube, etc).
+    
+    Args:
+        url: URL do vídeo
+        
+    Returns:
+        Caminho do arquivo baixado
+    """
+    print("Baixando video...")
+    
+    # Usa yt-dlp se disponível
+    import subprocess
+    
+    try:
+        resultado = subprocess.run(
+            ['yt-dlp', '-f', 'best', '-o', 'video_temp.%(ext)s', url],
+            capture_output=True,
+            text=True,
+            check=True
+        )
+        
+        # Encontra o arquivo baixado
+        for arquivo in os.listdir('.'):
+            if arquivo.startswith('video_temp.'):
+                print(f"Video baixado: {arquivo}")
+                return arquivo
+        
+    except subprocess.CalledProcessError as e:
+        print(f"Erro ao baixar video: {e}")
+        print("Dica: Instale yt-dlp com: pip install yt-dlp")
+        raise
+    except FileNotFoundError:
+        print("yt-dlp nao encontrado. Instale com: pip install yt-dlp")
+        raise
+    
+    raise Exception("Nao foi possivel encontrar o video baixado")
+
+
+def extrair_frames(caminho_video: str, pasta_saida: Path) -> int:
+    """
+    Extrai frames do vídeo a cada segundo.
+    
+    Args:
+        caminho_video: Caminho do arquivo de vídeo
+        pasta_saida: Pasta onde os frames serão salvos
+        
+    Returns:
+        Número de frames extraídos
+    """
+    print(f"Processando video: {caminho_video}")
+    
+    # Abre o vídeo
+    captura = cv2.VideoCapture(caminho_video)
+    
+    if not captura.isOpened():
+        raise Exception("Não foi possível abrir o arquivo de vídeo")
+    
+    # Obtém propriedades do vídeo
+    fps = captura.get(cv2.CAP_PROP_FPS)
+    total_frames = int(captura.get(cv2.CAP_PROP_FRAME_COUNT))
+    duracao_segundos = total_frames / fps if fps > 0 else 0
+    
+    print(f"Informacoes do video:")
+    print(f"   - FPS: {fps:.2f}")
+    print(f"   - Total de frames: {total_frames}")
+    print(f"   - Duracao: {duracao_segundos:.2f} segundos")
+    
+    # Calcula um frame a cada segundo
+    intervalo_frames = int(fps)  # Frames a pular (1 frame por segundo)
+    
+    frame_count = 0
+    salvo_count = 0
+    
+    while True:
+        # Define a posição do próximo frame (a cada segundo)
+        captura.set(cv2.CAP_PROP_POS_FRAMES, frame_count)
+        
+        ret, frame = captura.read()
+        
+        if not ret:
+            break  # Fim do vídeo
+        
+        # Salva o frame
+        timestamp_segundos = frame_count / fps
+        nome_arquivo = pasta_saida / f"frame_{timestamp_segundos:06.2f}s.jpg"
+        
+        cv2.imwrite(str(nome_arquivo), frame)
+        salvo_count += 1
+        
+        # Mostra progresso a cada 10 frames
+        if salvo_count % 10 == 0:
+            print(f"   Extraido frame {salvo_count} ({timestamp_segundos:.1f}s)")
+        
+        # Avança para o próximo segundo
+        frame_count += intervalo_frames
+    
+    captura.release()
+    
+    return salvo_count
+
+
+def limpar_arquivo_temporario(caminho: str):
+    """Remove arquivo temporario de video baixado."""
+    if os.path.exists(caminho) and caminho.startswith('video_temp.'):
+        os.remove(caminho)
+        print(f"Arquivo temporario removido: {caminho}")
+
+
+# ==============================================================================
+# FLUXO PRINCIPAL
+# ==============================================================================
+
+def main():
+    """Função principal do script."""
+    import sys
+    
+    # Configura encoding para Windows
+    if sys.platform == 'win32':
+        import io
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    
+    print("=" * 60)
+    print("  EXTRATOR DE FRAMES DE VIDEO")
+    print("=" * 60)
+    print()
+    
+    # 1. Detecta o tipo de URL
+    is_file_url = VIDEO_URL.startswith('file:///')
+    is_remote_url = VIDEO_URL.startswith(('http://', 'https://'))
+    is_local_path = not is_file_url and not is_remote_url
+    
+    # 2. Extrai identificador do vídeo
+    id_video = extrair_id_video(VIDEO_URL)
+    print(f"ID do video: {id_video}")
+    
+    # Mostra informações sobre o tipo de entrada
+    if is_file_url:
+        print(f"Tipo: Arquivo local (file:///)")
+    elif is_remote_url:
+        print(f"Tipo: URL remota")
+    else:
+        print(f"Tipo: Caminho local")
+    print()
+    
+    # 3. Cria pasta para os frames
+    pasta_output = criar_pasta_saida(id_video)
+    print()
+    
+    # 4. Determina o caminho do arquivo de vídeo
+    video_file = None
+    
+    try:
+        if is_remote_url:
+            # Baixa o vídeo de URL remota
+            print("Video remoto detectado, baixando...")
+            video_file = baixar_video(VIDEO_URL)
+        elif is_file_url:
+            # Converte file:/// para caminho do sistema
+            video_file = converter_file_url_to_path(VIDEO_URL)
+            print(f"Caminho convertido: {video_file}")
+            if not os.path.exists(video_file):
+                raise FileNotFoundError(f"Arquivo não encontrado: {video_file}")
+        else:
+            # Usa caminho local diretamente
+            video_file = VIDEO_URL
+            if not os.path.exists(video_file):
+                raise FileNotFoundError(f"Arquivo não encontrado: {video_file}")
+        
+        print()
+        
+        # 5. Extrai os frames
+        frames_extraidos = extrair_frames(video_file, pasta_output)
+        
+        print()
+        print("=" * 60)
+        print(f"SUCESSO!")
+        print(f"   Total de frames extraidos: {frames_extraidos}")
+        print(f"   Pasta de saida: {pasta_output.absolute()}")
+        print("=" * 60)
+        
+    except Exception as e:
+        print()
+        print("=" * 60)
+        print(f"ERRO: {e}")
+        print("=" * 60)
+        return 1
+    
+    finally:
+        # Limpa arquivos temporários (apenas para vídeos baixados)
+        if is_remote_url and video_file:
+            limpar_arquivo_temporario(video_file)
+    
+    return 0
+
+
+if __name__ == "__main__":
+    exit(main())
