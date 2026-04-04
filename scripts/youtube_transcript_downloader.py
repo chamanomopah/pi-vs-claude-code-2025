@@ -49,35 +49,27 @@ def extract_video_id(url: str) -> Optional[str]:
     return None
 
 
-def format_transcript(transcript_data, language_code='en') -> str:
+def format_transcript_organic(transcript_data) -> str:
     """
-    Format transcript with proper punctuation and structure.
-    
+    Format transcript as organic sentences - combine segments into complete sentences.
+
+    Rules:
+    - Join transcript segments until finding a period (.)
+    - Each complete sentence (from start to a period) goes on one line
+    - Double line break between sentences
+    - Don't split in the middle of sentences
+
     Args:
         transcript_data: Raw transcript data from YouTube API
-        language_code: Language code for punctuation rules ('en' or 'pt')
-    
+
     Returns:
-        Formatted transcript text
+        Formatted transcript text with organic sentence structure
     """
     if not transcript_data:
         return ""
     
-    # Configuration for different languages
-    if language_code.startswith('pt'):
-        # Portuguese punctuation rules
-        sentence_enders = r'(?<=[.!?])\s+'
-        abbreviation_pattern = r'\b(?:Sr|Sra|Dr|Dra|Prof|Profa|etc|ex|vs)\.$'
-    else:
-        # English punctuation rules (default)
-        sentence_enders = r'(?<=[.!?])\s+'
-        abbreviation_pattern = r'\b(?:Mr|Mrs|Ms|Dr|Prof|etc|e\.g|i\.e)\.$'
-    
-    formatted_lines = []
-    current_paragraph = []
-    char_count = 0
-    max_chars = 1000  # Characters per paragraph
-    
+    # Combine all transcript segments into one continuous text
+    full_text = ""
     for entry in transcript_data:
         text = entry.text.strip()
         
@@ -91,50 +83,61 @@ def format_transcript(transcript_data, language_code='en') -> str:
         text = re.sub(r'&quot;', '"', text)
         text = re.sub(r'&amp;', '&', text)
         
-        # Ensure proper spacing after punctuation
-        text = re.sub(r'([.!?])([A-Z])', r'\1 \2', text)
-        text = re.sub(r'([.!?])([a-z])', r'\1 \2', text)
+        # Add space between segments if needed
+        if full_text and not full_text.endswith(' ') and not text.startswith(' '):
+            full_text += ' '
+        full_text += text
+    
+    # Ensure proper spacing after punctuation
+    full_text = re.sub(r'([.!?])([A-Z])', r'\1 \2', full_text)
+    full_text = re.sub(r'([.!?])([a-z])', r'\1 \2', full_text)
+    
+    # Add proper capitalization after sentence endings
+    sentences_with_ends = []
+    parts = re.split(r'([.!?]+\s*)', full_text)
+    
+    for i in range(0, len(parts), 2):
+        sentence_part = parts[i] if i < len(parts) else ''
+        end_part = parts[i + 1] if i + 1 < len(parts) else ''
         
-        # Add proper capitalization after sentence endings
-        sentences = re.split(r'([.!?]\s+)', text)
-        for i, sentence in enumerate(sentences):
-            if i > 0 and sentence and sentence[0].isalpha():
-                sentence = sentence[0].upper() + sentence[1:]
-            sentences[i] = sentence
-        text = ''.join(sentences)
+        if sentence_part:
+            # Capitalize first letter if it's lowercase
+            if sentence_part and sentence_part[0].isalpha():
+                sentence_part = sentence_part[0].upper() + sentence_part[1:]
         
-        # Build paragraph
-        current_paragraph.append(text)
-        char_count += len(text)
+        sentences_with_ends.append(sentence_part + end_part)
+    
+    full_text = ''.join(sentences_with_ends)
+    
+    # Now split by periods to create organic sentences
+    # We'll split on period, exclamation mark, or question mark followed by space
+    sentence_ends = re.finditer(r'([.!?])\s+', full_text)
+    
+    sentences = []
+    last_end = 0
+    
+    for match in sentence_ends:
+        end_pos = match.end()
+        sentence = full_text[last_end:end_pos].strip()
         
-        # Start new paragraph after reaching max_chars or on logical breaks
-        if char_count >= max_chars or any(marker in text.lower() for marker in ['chapter', 'section', 'part ', 'firstly', 'secondly']):
-            formatted_lines.append(' '.join(current_paragraph))
-            formatted_lines.append('')  # Empty line between paragraphs
-            current_paragraph = []
-            char_count = 0
+        if sentence:
+            # Ensure it ends with punctuation
+            if not sentence[-1] in '.!?':
+                sentence += match.group(1)
+            sentences.append(sentence)
+        
+        last_end = end_pos
     
-    # Add remaining content
-    if current_paragraph:
-        formatted_lines.append(' '.join(current_paragraph))
+    # Add remaining text as final sentence if exists
+    if last_end < len(full_text):
+        remaining = full_text[last_end:].strip()
+        if remaining:
+            sentences.append(remaining)
     
-    # Add timestamps as reference at the end
-    result = '\n'.join(formatted_lines)
-    result += '\n\n' + '=' * 80 + '\n'
-    result += 'TIMESTAMP REFERENCE\n'
-    result += '=' * 80 + '\n'
+    # Join sentences with double line breaks
+    formatted_text = '\n\n'.join(sentences)
     
-    for entry in transcript_data[:20]:  # First 20 entries for reference
-        time = entry.start
-        minutes = int(time // 60)
-        seconds = int(time % 60)
-        timestamp = f"{minutes:02d}:{seconds:02d}"
-        result += f"[{timestamp}] {entry.text[:80]}...\n"
-    
-    if len(transcript_data) > 20:
-        result += f"... and {len(transcript_data) - 20} more entries\n"
-    
-    return result
+    return formatted_text
 
 
 def get_transcript(video_id: str, language_pref: str = 'auto') -> tuple:
@@ -238,62 +241,39 @@ Examples:
         print("  • https://www.youtube.com/embed/VIDEO_ID")
         sys.exit(1)
     
-    print(f"📺 Video ID: {video_id}")
-    print(f"🔍 Fetching transcript...")
-    
     try:
-        # Get transcript
+        # Get transcript (silent - no output)
         transcript_data, lang_code, actual_lang = get_transcript(video_id, args.language)
-        
+
         if not transcript_data:
-            print("❌ Error: No transcript data available")
+            print("Error: No transcript data available", file=sys.stderr)
             sys.exit(1)
-        
-        print(f"✅ Transcript found! ({actual_lang}, {len(transcript_data)} entries)")
-        
-        # Format transcript
-        formatted = format_transcript(transcript_data, lang_code)
-        
-        # Save to file
+
+        # Format transcript with organic sentence structure
+        formatted = format_transcript_organic(transcript_data)
+
+        # Save to file (silent - no output)
         with open(args.output, 'w', encoding='utf-8') as f:
             f.write(formatted)
-        
-        print(f"💾 Saved to: {args.output}")
-        print(f"📝 Character count: {len(formatted):,}")
-        
-        # Display in terminal
+
+        # Display in terminal - ONLY the transcript, nothing else
         if not args.no_display:
-            print("\n" + "=" * 80)
-            print("TRANSCRIPT CONTENT")
-            print("=" * 80 + "\n")
-            
-            # Display first 2000 characters to avoid spamming terminal
-            preview_length = 2000
-            if len(formatted) > preview_length:
-                print(formatted[:preview_length])
-                print(f"\n... ({len(formatted) - preview_length:,} more characters)")
-                print(f"\n💡 Full transcript saved in: {args.output}")
-            else:
-                print(formatted)
-        
-        print(f"\n✨ Done!")
-        
+            print(formatted, end='')
+
     except VideoUnavailable:
-        print("❌ Error: Video is unavailable or private")
+        print("Error: Video is unavailable or private", file=sys.stderr)
         sys.exit(1)
     except TranscriptsDisabled:
-        print("❌ Error: Transcripts are disabled for this video")
+        print("Error: Transcripts are disabled for this video", file=sys.stderr)
         sys.exit(1)
     except NoTranscriptFound:
-        print("❌ Error: No transcript found for this video")
-        print("   The video may not have captions available.")
+        print("Error: No transcript found for this video", file=sys.stderr)
         sys.exit(1)
     except CouldNotRetrieveTranscript as e:
-        print("❌ Error: Could not retrieve transcript")
-        print(f"   Details: {str(e)}")
+        print(f"Error: Could not retrieve transcript: {str(e)}", file=sys.stderr)
         sys.exit(1)
     except Exception as e:
-        print(f"❌ Error: {str(e)}")
+        print(f"Error: {str(e)}", file=sys.stderr)
         sys.exit(1)
 
 
