@@ -31,6 +31,7 @@ interface AgentDef {
 	name: string;
 	description: string;
 	tools: string;
+	skills: string[];  // Skills available to this agent (loaded in subprocess only)
 	systemPrompt: string;
 	file: string;
 }
@@ -88,20 +89,67 @@ function parseAgentFile(filePath: string): AgentDef | null {
 		const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
 		if (!match) return null;
 
-		const frontmatter: Record<string, string> = {};
-		for (const line of match[1].split(/\r?\n/)) {
+		// Parse frontmatter with support for YAML arrays
+		const frontmatter: Record<string, string | string[]> = {};
+		const lines = match[1].split(/\r?\n/);
+		let currentArray: string[] | null = null;
+		let currentKey: string | null = null;
+
+		for (const line of lines) {
 			const idx = line.indexOf(":");
 			if (idx > 0) {
-				frontmatter[line.slice(0, idx).trim()] = line.slice(idx + 1).trim();
+				// New key-value pair
+				const key = line.slice(0, idx).trim();
+				const value = line.slice(idx + 1).trim();
+				currentKey = key;
+				currentArray = null;
+
+				// Check if this might be the start of an array (next line starts with "-")
+				if (value === "") {
+					currentArray = [];
+					frontmatter[key] = currentArray;
+				} else {
+					frontmatter[key] = value;
+				}
+			} else if (currentArray && currentKey) {
+				// Array item (starts with "-")
+				const itemMatch = line.match(/^\s+-\s+(.+)$/);
+				if (itemMatch) {
+					currentArray.push(itemMatch[1].trim());
+				}
 			}
 		}
 
 		if (!frontmatter.name) return null;
 
+		// Parse skills field (supports both "skills:" and "skill:" plural/singular)
+		// Formats supported:
+		// - YAML array: "skills:\n - skill1\n - skill2"
+		// - Comma-separated: "skills: skill1, skill2"
+		// - Single: "skills: skill1"
+		let skills: string[] = [];
+		const skillsField = frontmatter.skills || frontmatter.skill;
+
+		if (skillsField) {
+			if (Array.isArray(skillsField)) {
+				// YAML array format
+				skills = skillsField.filter(s => s.length > 0);
+			} else if (typeof skillsField === "string") {
+				// Handle comma-separated values
+				if (skillsField.includes(",")) {
+					skills = skillsField.split(",").map(s => s.trim()).filter(s => s.length > 0);
+				} else {
+					// Single skill (trim and filter empty)
+					skills = [skillsField.trim()].filter(s => s.length > 0);
+				}
+			}
+		}
+
 		return {
-			name: frontmatter.name,
-			description: frontmatter.description || "",
-			tools: frontmatter.tools || "read,grep,find,ls",
+			name: String(frontmatter.name),
+			description: String(frontmatter.description || ""),
+			tools: String(frontmatter.tools || "read,grep,find,ls"),
+			skills,  // Empty array if no skills defined
 			systemPrompt: match[2].trim(),
 			file: filePath,
 		};
@@ -429,6 +477,12 @@ export default function (pi: ExtensionAPI) {
 			"--session", agentSessionFile,
 		];
 
+		// Add skills via --skill flags (each skill gets its own --skill flag)
+		// This loads the skill only in the subprocess of the agent
+		for (const skill of state.def.skills) {
+			args.push("--skill", skill);
+		}
+
 		// Continue existing session if we have one
 		if (state.sessionFile) {
 			args.push("-c");
@@ -734,11 +788,14 @@ export default function (pi: ExtensionAPI) {
 
 	pi.on("before_agent_start", async (_event, _ctx) => {
 		// Build dynamic agent catalog from active team only
+		// Include skills for agents that have them
 		const agentCatalog = Array.from(agentStates.values())
-			.map(s => `### ${displayName(s.def.name)}\n**Dispatch as:** \`${s.def.name}\`\n${s.def.description}\n**Tools:** ${s.def.tools}`)
+			.filter(s => s.def.skills.length > 0)  // Only show agents with skills
+			.map(s => `### ${displayName(s.def.name)}\n**Dispatch as:** \`${s.def.name}\`\n${s.def.description}\n**Skills:** ${s.def.skills.join(", ")}`)
 			.join("\n\n");
 
-		const teamMembers = Array.from(agentStates.values()).map(s => displayName(s.def.name)).join(", ");
+		const agentsWithSkills = Array.from(agentStates.values()).filter(s => s.def.skills.length > 0);
+		const teamMembers = agentsWithSkills.map(s => displayName(s.def.name)).join(", ");
 
 		return {
 			systemPrompt: `You are a dispatcher agent. You coordinate specialist agents to accomplish tasks.
@@ -746,12 +803,12 @@ You do NOT have direct access to the codebase. You MUST delegate all work throug
 agents using the dispatch_agent tool.
 
 ## Active Team: ${activeTeamName}
-Members: ${teamMembers}
+Members with skills: ${teamMembers || "none"}
 You can ONLY dispatch to agents listed below. Do not attempt to dispatch to agents outside this team.
 
 ## How to Work
 - Analyze the user's request and break it into clear sub-tasks
-- Choose the right agent(s) for each sub-task
+- Choose the right agent(s) for each sub-task based on their skills
 - Dispatch tasks using the dispatch_agent tool
 - Review results and dispatch follow-up agents if needed
 - If a task fails, try a different agent or adjust the task description
@@ -763,8 +820,9 @@ You can ONLY dispatch to agents listed below. Do not attempt to dispatch to agen
 - You can chain agents: use scout to explore, then builder to implement
 - You can dispatch the same agent multiple times with different tasks
 - Keep tasks focused — one clear objective per dispatch
+- Pay attention to agent skills — they have specialized capabilities loaded
 
-## Agents
+## Agents (with skills)
 
 ${agentCatalog}`,
 		};

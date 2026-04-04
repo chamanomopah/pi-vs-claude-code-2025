@@ -4,7 +4,7 @@ description: Headless browser automation agent using Playwright CLI. Use when yo
 model: opus
 color: orange
 skills:
- - playwright-bowser
+ - bowser
 ---
 
 # Playwright Bowser Agent

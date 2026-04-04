@@ -1,6 +1,7 @@
 ---
 name: 5-min-scripts
 description: fazer um script rápido em python para resolver um problema específico 
+allowed-tools: read,write,edit,bash,grep,find,ls
 ---
 
 # ativação
