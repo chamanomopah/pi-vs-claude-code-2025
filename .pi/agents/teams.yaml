@@ -10,6 +10,7 @@ all:
   - plan-reviewer
   - flowchart
   - mermaid
+  - tester
 
 pi-pi full:
   - pi-pi/ext-expert

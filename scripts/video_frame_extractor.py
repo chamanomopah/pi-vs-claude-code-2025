@@ -24,6 +24,37 @@ if sys.platform == 'win32':
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 
+def limpar_url(url: str) -> str:
+    """
+    Limpa a URL removendo parâmetros que podem causar problemas.
+    
+    Args:
+        url: URL original
+        
+    Returns:
+        URL limpa
+    """
+    # Remove parâmetros de timestamp (t=) e outros problemáticos
+    if 'youtube.com/watch' in url or 'youtu.be/' in url:
+        # Para YouTube, mantém apenas o parâmetro v=
+        from urllib.parse import urlparse, parse_qs, urlencode
+        
+        parsed = urlparse(url)
+        params = parse_qs(parsed.query)
+        
+        # Mantém apenas o ID do vídeo
+        video_id = params.get('v', [None])[0]
+        if video_id:
+            # Reconstrói a URL limpa
+            clean_url = f"https://www.youtube.com/watch?v={video_id}"
+            if clean_url != url:
+                print(f"[INFO] URL limpa: {clean_url}")
+                print(f"[INFO] (removidos parâmetros extras: &t=, &list=, etc)")
+            return clean_url
+    
+    return url
+
+
 def limpar_nome_arquivo(nome: str) -> str:
     """
     Remove caracteres inválidos de nomes de arquivo.
@@ -141,6 +172,14 @@ def baixar_video(url: str, verbose: bool = False) -> str:
         Caminho do arquivo baixado
     """
     print("Baixando video...")
+    
+    # Limpa a URL removendo parâmetros problemáticos
+    url_limpa = limpar_url(url)
+    if url_limpa != url:
+        print(f"[INFO] URL original: {url}")
+        print(f"[INFO] URL limpa: {url_limpa}")
+        url = url_limpa
+    
     print(f"URL: {url}")
     print()
     
@@ -156,108 +195,168 @@ def baixar_video(url: str, verbose: bool = False) -> str:
             except Exception as e:
                 print(f"[DEBUG] Aviso: nao foi possivel remover {arquivo}: {e}")
     
-    # Comando yt-dlp com opções melhoradas
-    comando = [
-        'yt-dlp',
-        '-f', 'best[ext=mp4]/best',  # Prefere MP4, mas aceita o melhor disponível
-        '-o', 'video_temp.%(ext)s',
-        '--no-playlist',  # Não baixa playlists
-        '--no-warnings',  # Suprime avisos na saída normal
+    # Tenta diferentes estratégias de formato
+    formatos = [
+        'best[ext=mp4]/best',  # Primeira opção: MP4 ou melhor
+        'bestvideo+bestaudio/best',  # Segunda opção: vídeo + áudio separados
+        'worst',  # Último recurso: pior qualidade
     ]
     
-    # Adiciona verbose se solicitado
-    if verbose:
-        comando.append('--verbose')
-        print("[DEBUG] Modo verbose ativado")
-        print(f"[DEBUG] Comando: {' '.join(comando)}")
-        print()
-    
-    try:
-        print(f"[INFO] Executando yt-dlp...")
+    for i, formato in enumerate(formatos, 1):
+        print(f"[TENTATIVA {i}/{len(formatos)}] Format: {formato}")
         
-        resultado = subprocess.run(
-            comando + [url],
-            capture_output=True,
-            text=True,
-            check=False  # Vamos verificar o resultado manualmente
-        )
+        # Comando yt-dlp com opções melhoradas
+        comando = [
+            'yt-dlp',
+            '-f', formato,
+            '-o', 'video_temp.%(ext)s',
+            '--no-playlist',  # Não baixa playlists
+            '--no-warnings',  # Suprime avisos na saída normal
+            '--no-check-certificates',  # Ignora erros de certificado
+            '--user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',  # User agent de browser
+        ]
         
-        # Mostra stdout se houver (informações úteis)
-        if resultado.stdout and verbose:
-            print("[STDOUT] yt-dlp output:")
-            print(resultado.stdout)
+        # Adiciona verbose se solicitado
+        if verbose:
+            comando.append('--verbose')
+            print(f"[DEBUG] Comando: {' '.join(comando)}")
             print()
         
-        # Mostra stderr se houver erros ou avisos
-        if resultado.stderr:
-            # Filtra apenas linhas importantes do stderr
-            stderr_lines = resultado.stderr.strip().split('\n')
-            erros_importantes = [
-                line for line in stderr_lines
-                if any(keyword in line.lower() for keyword in [
-                    'error', 'failed', 'corrupt', 'unavailable',
-                    'copyright', 'private', 'not found', 'forbidden'
-                ]) or line.strip().startswith('ERROR')
-            ]
+        try:
+            print(f"[INFO] Executando yt-dlp...")
             
-            if erros_importantes:
-                print("[STDERR] Erros detectados:")
-                for erro in erros_importantes:
-                    print(f"  {erro}")
+            resultado = subprocess.run(
+                comando + [url],
+                capture_output=True,
+                text=True,
+                check=False,
+                timeout=300  # 5 minutos de timeout
+            )
+            
+            # Mostra stdout se houver (informações úteis)
+            if resultado.stdout and verbose:
+                print("[STDOUT] yt-dlp output (últimas 20 linhas):")
+                linhas = resultado.stdout.strip().split('\n')
+                print('\n'.join(linhas[-20:]))
                 print()
-        
-        # Verifica se o comando foi bem-sucedido
-        if resultado.returncode != 0:
-            print(f"[ERRO] yt-dlp retornou codigo {resultado.returncode}")
-            print()
-            print("Detalhes do erro:")
+            
+            # Verifica se há erros 403 (Forbidden) que indicam bloqueio do YouTube
+            if '403' in resultado.stderr or 'Forbidden' in resultado.stderr:
+                print("[AVISO] YouTube está bloqueando o download (HTTP 403)")
+                print()
+                print("Soluções possíveis:")
+                print("  1. Atualize o yt-dlp: pip install --upgrade yt-dlp")
+                print("  2. Use cookies de autenticacao (veja documentacao do yt-dlp)")
+                print("  3. Baixe o vídeo manualmente e use o arquivo local")
+                print("  4. Tente usar uma VPN")
+                print()
+                
+                # Tenta a próxima estratégia
+                if i < len(formatos):
+                    print(f"[INFO] Tentando próxima estratégia de formato...")
+                    continue
+                else:
+                    raise Exception("YouTube bloqueou o download (HTTP 403). Tente as soluções acima.")
+            
+            # Mostra stderr se houver erros importantes
             if resultado.stderr:
-                print(resultado.stderr)
-            else:
-                print("(sem detalhes disponíveis)")
+                stderr_lines = resultado.stderr.strip().split('\n')
+                erros_importantes = [
+                    line for line in stderr_lines
+                    if any(keyword in line.lower() for keyword in [
+                        'error', 'failed', 'corrupt', 'unavailable',
+                        'copyright', 'private', 'not found'
+                    ]) and 'warning' not in line.lower()
+                ]
+                
+                if erros_importantes and not verbose:
+                    print("[STDERR] Erros detectados:")
+                    for erro in erros_importantes[:5]:  # Primeiros 5 erros
+                        print(f"  {erro}")
+                    print()
+            
+            # Verifica se o comando foi bem-sucedido
+            if resultado.returncode != 0:
+                print(f"[AVISO] Tentativa {i} falhou (código {resultado.returncode})")
+                
+                # Se não for a última tentativa, continua
+                if i < len(formatos):
+                    print(f"[INFO] Tentando próxima estratégia...")
+                    print()
+                    continue
+                else:
+                    # Última tentativa falhou, mostra detalhes
+                    print(f"[ERRO] Todas as tentativas falharam")
+                    print()
+                    print("Detalhes do erro:")
+                    if resultado.stderr:
+                        # Mostra apenas erros relevantes
+                        for linha in resultado.stderr.split('\n'):
+                            if any(p in linha.lower() for p in ['error', 'failed', '403', 'forbidden']):
+                                print(f"  {linha}")
+                    print()
+                    print("Possiveis soluções:")
+                    print("  1. Verifique se a URL está correta")
+                    print("  2. Atualize o yt-dlp: pip install --upgrade yt-dlp")
+                    print("  3. Baixe o vídeo manualmente e use o arquivo local")
+                    print("  4. Verifique se o vídeo está disponível na sua região")
+                    raise Exception(f"yt-dlp falhou com código {resultado.returncode}")
+            
+            # Encontra o arquivo baixado
+            print("[INFO] Buscando arquivo baixado...")
+            arquivos_encontrados = []
+            for arquivo in os.listdir('.'):
+                if arquivo.startswith('video_temp.'):
+                    # Verifica se é um arquivo de vídeo válido
+                    if os.path.isfile(arquivo):
+                        tamanho = os.path.getsize(arquivo)
+                        print(f"[INFO] Arquivo encontrado: {arquivo} ({tamanho} bytes)")
+                        if tamanho > 1000:  # Pelo menos 1KB
+                            arquivos_encontrados.append(arquivo)
+                        else:
+                            print(f"[AVISO] Arquivo muito pequeno, pode estar corrompido")
+            
+            if not arquivos_encontrados:
+                print(f"[AVISO] Tentativa {i} não produziu arquivo válido")
+                if i < len(formatos):
+                    print(f"[INFO] Tentando próxima estratégia...")
+                    print()
+                    continue
+                else:
+                    raise Exception("Nenhum arquivo de vídeo foi baixado")
+            
+            # Sucesso! Retorna o maior arquivo encontrado
+            arquivo_final = max(arquivos_encontrados, key=lambda f: os.path.getsize(f))
+            print(f"[SUCESSO] Video baixado: {arquivo_final}")
+            return arquivo_final
+            
+        except FileNotFoundError:
+            print("[ERRO] yt-dlp nao encontrado no sistema")
             print()
-            print("Possiveis soluções:")
-            print("  1. Verifique se a URL está correta")
-            print("  2. Verifique se o vídeo está disponível")
-            print("  3. Tente atualizar o yt-dlp: pip install --upgrade yt-dlp")
-            print("  4. Se o vídeo é privado, use yt-dlp com cookies")
-            raise Exception(f"yt-dlp falhou com código {resultado.returncode}")
+            print("Para instalar o yt-dlp, execute:")
+            print("  pip install yt-dlp")
+            print()
+            print("Ou no Linux:")
+            print("  sudo apt install yt-dlp")
+            raise Exception("yt-dlp não encontrado. Instale com: pip install yt-dlp")
         
-        # Encontra o arquivo baixado
-        print("[INFO] Buscando arquivo baixado...")
-        arquivos_encontrados = []
-        for arquivo in os.listdir('.'):
-            if arquivo.startswith('video_temp.'):
-                # Verifica se é um arquivo de vídeo válido
-                if os.path.isfile(arquivo):
-                    tamanho = os.path.getsize(arquivo)
-                    print(f"[INFO] Arquivo encontrado: {arquivo} ({tamanho} bytes)")
-                    if tamanho > 1000:  # Pelo menos 1KB
-                        arquivos_encontrados.append(arquivo)
-                    else:
-                        print(f"[AVISO] Arquivo muito pequeno, pode estar corrompido")
+        except subprocess.TimeoutExpired:
+            print(f"[AVISO] Tentativa {i} excedeu o tempo limite (5 minutos)")
+            if i < len(formatos):
+                print(f"[INFO] Tentando próxima estratégia...")
+                continue
+            else:
+                raise Exception("Download excedeu o tempo limite. O vídeo pode ser muito grande.")
         
-        if not arquivos_encontrados:
-            raise Exception("Nenhum arquivo de vídeo foi baixado (ou arquivo muito pequeno)")
-        
-        # Retorna o maior arquivo encontrado
-        arquivo_final = max(arquivos_encontrados, key=lambda f: os.path.getsize(f))
-        print(f"[SUCESSO] Video baixado: {arquivo_final}")
-        return arquivo_final
-        
-    except FileNotFoundError:
-        print("[ERRO] yt-dlp nao encontrado no sistema")
-        print()
-        print("Para instalar o yt-dlp, execute:")
-        print("  pip install yt-dlp")
-        print()
-        print("Ou no Linux:")
-        print("  sudo apt install yt-dlp")
-        raise Exception("yt-dlp não encontrado. Instale com: pip install yt-dlp")
-    
-    except Exception as e:
-        print(f"[ERRO] Excecao ao baixar video: {e}")
-        raise
+        except Exception as e:
+            if i < len(formatos):
+                print(f"[AVISO] Tentativa {i} falhou: {e}")
+                print(f"[INFO] Tentando próxima estratégia...")
+                print()
+                continue
+            else:
+                print(f"[ERRO] Todas as tentativas falharam: {e}")
+                raise
 
 
 def extrair_frames(caminho_video: str, pasta_saida: Path) -> int:
