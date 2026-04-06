@@ -1,7 +1,7 @@
 ---
 name: n8n-plan-catalogo
 description: Cria Declarative End-to-End n8n Workflow Specification Plans baseados no catálogo de nodes do projeto. Use quando quiser planejar workflows completos ou modificar workflows existentes, usando apenas nodes disponíveis em catalogo_nodes.py.
-argument-hint: [workflow_id] [descrição/modificação]
+argument-hint: "[workflow_id] [descrição/modificação]"
 disable-model-invocation: true
 allowed-tools: Read, Bash(python:*), AskUserQuestion
 ---

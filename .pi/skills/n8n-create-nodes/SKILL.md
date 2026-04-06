@@ -1,7 +1,7 @@
 ---
 name: n8n-create-nodes
 description: Criar arquivo .nodes com definição de nodes N8N. Use para criar novos workflows ou adicionar nodes a workflows existentes.
-argument-hint: [nodes-spec] [-t workflow] [-s]
+argument-hint: "nodes-spec [-t workflow] [-s]"
 disable-model-invocation: true
 allowed-tools: Write, Bash
 ---
