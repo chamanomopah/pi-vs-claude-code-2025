@@ -1,5 +1,0 @@
-scheduleTrigger>googleSheets
-googleSheets>executeCommand
-executeCommand>if
-if>(continue|skip)
-continue>googleSheetsSave

@@ -171,7 +171,7 @@ project_root/
 ├── scripts/
 │   ├── youtube_transcript_downloader.py
 │   ├── video_frame_extractor.py
-│   └── youtube_channel_scraper.py (NOVO)
+│   └── youtube_channel_scraper.py 
 ├── transcripts/
 │   ├── video_1.txt
 │   ├── video_2.txt
