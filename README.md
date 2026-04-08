@@ -188,6 +188,8 @@ The `agent-team` orchestrator operates as a dispatcher. Instead of answering pro
 - **pi-pi Meta-Agent**: The `pi-pi` team specifically delegates tasks to specialized Pi framework experts (`ext-expert.md`, `theme-expert.md`, `tui-expert.md`) located in `.pi/agents/pi-pi/` to build high-quality Pi extensions using parallel research.
   - **Web Crawling Fallbacks**: To ingest the latest framework documentation dynamically, these experts use `firecrawl` as their default modern page crawler, but are explicitly programmed to safely fall back to the native `curl` baked into their bash toolset if Firecrawl fails or is unavailable.
 
+> **📚 Troubleshooting:** If agents don't appear in the dispatch list, see [Agent Teams Documentation Index](./docs/AGENT_TEAMS_INDEX.md) for complete troubleshooting guides and solutions.
+
 ### Agent Chains (`/chain`)
 Unlike the dynamic dispatcher, `agent-chain` acts as a sequential pipeline orchestrator. Workflows are defined in `.pi/agents/agent-chain.yaml` where the output of one agent becomes the input (`$INPUT`) to the next.
 - Workflows are defined as a list of `steps`, where each step specifies an `agent` and a `prompt`. 

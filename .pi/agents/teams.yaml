@@ -23,20 +23,8 @@ pi-pi full:
   - pi-pi/cli-expert
   - pi-pi/keybinding-expert
   - pi-pi/pi-orchestrator
+  - builder
 
-meta-team:
-  - pi-pi/ext-expert
-  - pi-pi/skill-expert
-  - pi-pi/agent-expert
-
-# Scout and research for initial exploration
-scout-research:
-  - scout
-  - researcher
-
-# Flowchart team for diagram creation (includes PNG generation)
-diagrammers:
-  - flowchart
 
 fast-pi-mvp:
   - researcher
@@ -46,3 +34,6 @@ fast-pi-mvp:
 
 n8n-team:
   - n8n/n8n-builder
+
+agent experts:
+  - pi-pi/agent-expert

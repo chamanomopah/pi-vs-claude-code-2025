@@ -788,20 +788,14 @@ export default function (pi: ExtensionAPI) {
 
 	pi.on("before_agent_start", async (_event, _ctx) => {
 		// Build dynamic agent catalog from active team only
-		// PATCH: Skills filter removed - show ALL agents in catalog
 		// Include skills for agents that have them
 		const agentCatalog = Array.from(agentStates.values())
-			.map(s => {
-				const skillInfo = s.def.skills.length > 0
-					? `\n**Skills:** ${s.def.skills.join(", ")}`
-					: "";
-				return `### ${displayName(s.def.name)}\n**Dispatch as:** \`${s.def.name}\`\n${s.def.description}${skillInfo}`;
-			})
+			.filter(s => s.def.skills.length > 0)  // Only show agents with skills
+			.map(s => `### ${displayName(s.def.name)}\n**Dispatch as:** \`${s.def.name}\`\n${s.def.description}\n**Skills:** ${s.def.skills.join(", ")}`)
 			.join("\n\n");
 
-		// PATCH: Show all team members, not just those with skills
-		const teamMembers = Array.from(agentStates.values()).map(s => displayName(s.def.name)).join(", ");
 		const agentsWithSkills = Array.from(agentStates.values()).filter(s => s.def.skills.length > 0);
+		const teamMembers = agentsWithSkills.map(s => displayName(s.def.name)).join(", ");
 
 		return {
 			systemPrompt: `You are a dispatcher agent. You coordinate specialist agents to accomplish tasks.
@@ -809,7 +803,7 @@ You do NOT have direct access to the codebase. You MUST delegate all work throug
 agents using the dispatch_agent tool.
 
 ## Active Team: ${activeTeamName}
-Members (all): ${teamMembers}
+Members with skills: ${teamMembers || "none"}
 You can ONLY dispatch to agents listed below. Do not attempt to dispatch to agents outside this team.
 
 ## How to Work
