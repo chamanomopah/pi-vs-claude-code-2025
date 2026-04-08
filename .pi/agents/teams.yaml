@@ -37,3 +37,4 @@ n8n-team:
 
 agent experts:
   - pi-pi/agent-expert
+  - builder
