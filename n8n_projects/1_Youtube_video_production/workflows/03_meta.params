@@ -1,0 +1,18 @@
+set|values|{"video_url": "{{ $json.url }}", "transcript_path": "{{ $json.transcript_path }}"}
+
+executeCommand|command|claude "Analyze the video transcript and create a meta-prompt for image generation specialist. Video: {{ $json.video_url }}, Transcript: {{ $json.transcript_path }}"
+
+set1|values|{"video_url": "{{ $json.url }}", "transcript_path": "{{ $json.transcript_path }}"}
+
+executeCommand1|command|claude "Analyze the video transcript and create a meta-prompt for script writing specialist. Video: {{ $json.video_url }}, Transcript: {{ $json.transcript_path }}"
+
+wait|time|2000
+wait|unit|milliseconds
+
+merge|mode|combine
+merge|combineBy|combiningAll
+
+googleSheetsSave|operation|update
+googleSheetsSave|sheetId|{{ $env.GOOGLE_SHEET_ID }}
+googleSheetsSave|range|script_meta_prompt,image_meta_prompt
+googleSheetsSave|values|{{ {script_meta_prompt: $json.script_prompt, image_meta_prompt: $json.image_prompt} }}

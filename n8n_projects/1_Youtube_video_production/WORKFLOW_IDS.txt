@@ -1,0 +1,45 @@
+# WORKFLOW IDs - Projeto 1: Youtube Video Production
+
+Gerado em: 08/04/2026
+
+## WORKFLOWS UPLOADADOS
+
+### 01_captura_top_videos
+ID: PwmxNA0DnfsH9bQm
+Nome: 01_captura_top_videos
+Nodes: 5 (Schedule Trigger, Google Sheets, Execute Command, IF, Google Sheets1)
+Status: Inativo (pronto para uso)
+
+### 02_loop_transcricoes_frames
+ID: uwTQUeZzgn7sXwhA
+Nome: 02_loop_transcricoes_frames
+Nodes: 8 (Loop Over Items, Set, Execute Command, Set1, Execute Command1, Wait, Merge, Google Sheets)
+Status: Inativo (pronto para uso)
+
+### 03_agentes_meta_prompts
+ID: uMSwc66BVaLAxKYB
+Nome: 03_agentes_meta_prompts
+Nodes: 7 (Set, Execute Command, Set1, Execute Command1, Wait, Merge, Google Sheets)
+Status: Inativo (pronto para uso)
+
+### 04_geracao_final
+ID: K9KtWUS80RwMJsPr
+Nome: 04_geracao_final
+Nodes: 3 (Google Sheets, Google Drive, Respond to Webhook)
+Status: Inativo (pronto para uso)
+
+---
+
+## ARQUIVOS LOCAIS
+
+Workflows finais com parâmetros:
+- tools/n8n/01_captura_top_videos_nodesAdded_connected_params.json
+- tools/n8n/02_loop_transcricoes_frames_nodesAdded_connected_params.json
+- tools/n8n/03_agentes_meta_prompts_nodesAdded_connected_params.json
+- tools/n8n/04_geracao_final_nodesAdded_connected_params.json
+
+Arquivos de configuração (.nodes, .formula, .params):
+- tools/n8n/01_captura.*
+- tools/n8n/02_loop.*
+- tools/n8n/03_meta.*
+- tools/n8n/04_final.*

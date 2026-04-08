@@ -34,6 +34,7 @@ fast-pi-mvp:
 
 n8n-team:
   - n8n/n8n-builder
+  - n8n/n8n-arquitecture
 
 agent experts:
   - pi-pi/agent-expert

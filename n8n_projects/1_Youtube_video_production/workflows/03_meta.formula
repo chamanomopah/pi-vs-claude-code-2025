@@ -1,0 +1,7 @@
+set>executeCommand
+set1>executeCommand1
+executeCommand>wait
+executeCommand1>wait
+wait>merge
+wait>merge
+merge>googleSheetsSave

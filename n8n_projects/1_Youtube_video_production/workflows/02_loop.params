@@ -1,0 +1,21 @@
+splitInBatches|batchSize|1
+splitInBatches|options|{}
+
+set|values|{"url_video": "{{ $json.url }}"}
+
+executeCommand|command|python C:/Users/JOSE/.claude/.IMPLEMENTATION/projects/B-software/H-minimum-orquestration/pi-vs-claude-code/n8n_projects/1_Youtube_video_production/scripts/youtube_transcript_downloader.py "{{ $json.url_video }}"
+
+set1|values|{"url_video": "{{ $json.url }}"}
+
+executeCommand1|command|python C:/Users/JOSE/.claude/.IMPLEMENTATION/projects/B-software/H-minimum-orquestration/pi-vs-claude-code/n8n_projects/1_Youtube_video_production/scripts/video_frame_extractor.py "{{ $json.url_video }}"
+
+wait|time|1000
+wait|unit|milliseconds
+
+merge|mode|combine
+merge|combineBy|combiningAll
+
+googleSheetsSave|operation|update
+googleSheetsSave|sheetId|{{ $env.GOOGLE_SHEET_ID }}
+googleSheetsSave|range|transcript_path,frames_path
+googleSheetsSave|values|{{ {transcript_path: $json.transcript_path, frames_path: $json.frames_path} }}

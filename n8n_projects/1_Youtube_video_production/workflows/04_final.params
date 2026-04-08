@@ -1,0 +1,12 @@
+googleSheets|operation|lookup
+googleSheets|sheetId|{{ $env.GOOGLE_SHEET_ID }}
+googleSheets|range|A:Z
+
+googleDrive|operation|upload
+googleDrive|folderId|{{ $env.GOOGLE_DRIVE_FOLDER_ID }}
+googleDrive|fileName|video_production_{{ $now.format("yyyy-MM-dd") }}.json
+googleDrive|fileData|{{ JSON.stringify($json) }}
+
+webhook|responseStatus|200
+webhook|responseBody|{"success": true, "message": "Workflow completed successfully"}
+webhook|options|{"responseMode": "responseNode"}

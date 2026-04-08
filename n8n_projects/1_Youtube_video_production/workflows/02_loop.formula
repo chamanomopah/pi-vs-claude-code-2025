@@ -1,0 +1,9 @@
+splitInBatches>(main0|main1)
+main1>set
+set>executeCommand
+executeCommand>set1
+set1>executeCommand1
+executeCommand1>wait
+wait>merge
+merge>googleSheetsSave
+googleSheetsSave>splitInBatches
