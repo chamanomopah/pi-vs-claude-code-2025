@@ -25,7 +25,6 @@ pi-pi full:
   - pi-pi/pi-orchestrator
   - builder
 
-
 fast-pi-mvp:
   - researcher
   - builder
@@ -36,4 +35,22 @@ n8n-team:
 
 agent experts:
   - pi-pi/agent-expert
+  - builder
+
+video-production:
+  - video/video-producer
+  - n8n/n8n-builder
+  - researcher
+
+video-production-mvp:
+  - video/video-producer
+  - researcher
+  - builder
+
+
+video-production-full:
+  - video/video-producer
+  - n8n/n8n-builder
+  - n8n/n8n-arquitecture
+  - researcher
   - builder
