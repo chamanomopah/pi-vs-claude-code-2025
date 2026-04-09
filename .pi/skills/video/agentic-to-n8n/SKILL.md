@@ -8,6 +8,7 @@ description: utilizar as capacidades agênticas para criar um processo completo 
 nesse documento é apresentado o `objetivo do projeto`, a ideia de `repetição do processo e escalabilidade`, o `processo agêntico` que será utilizado para criar os vídeos, a ideia de um processo `100% gratuito`, o conceito de `agente`, uma `ideia de workflow` para a criação dos vídeos, e a importância dos `recursos caros`, como os meta-prompts, para garantir a qualidade do processo e do vídeo final. além disso, são discutidos os `KPIs` que serão utilizados para medir a eficiência e a qualidade do processo, e os `3 processos principais` que serão seguidos para alcançar o objetivo do projeto. o foco é criar um sistema eficiente, de alta qualidade, e 100% gratuito para a produção de vídeos
 
 
+
 ## objetivo do projeto
 
 a ideia é fazer uma produção completa de algo utilizando Capacidades agênticas para ter um primeiro MVP de qualquer produção e depois conseguir fazer a mímica do processo do agente para o n8n, transformando em uma automação completa, evitando todo o processo de criação de workflow demorado e repetitivo, teste e validação.
@@ -49,6 +50,8 @@ na pratica precisa ser um processo que seja 100% gratuito pra não ter limite de
 o modelos locais e opensource que podem ser utilizados na maquina do usuario são uma ótima opção para garantir que o processo seja 100% gratuito, evitando custos com APIs e serviços de terceiros. 
 
 a preferencia vai ser utilizar tecnologias open source, como o uso de modelos de linguagem LMMs para gerar o roteiro, e ferramentas de edição de vídeo como o FFmpeg para a edição final, utilizar modelos como gemini 2.5 flash (nano banana) da google que possuem um limite generoso gratuito para a geração de imagens. 
+
+tem que utilizar sempre apis
 
 
 ## conceito de agente

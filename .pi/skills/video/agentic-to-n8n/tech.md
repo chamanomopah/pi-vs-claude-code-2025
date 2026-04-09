@@ -1,6 +1,8 @@
 lista de techs que eu tenho preferencia de utilizar 
 
-image_gen_model : 
+roteiro vai ser gerado pelo proprio agente
+
+image_gen_model : gemini 2.5 flash
 
 juntar videos, adicionar audio, etc (qualquer pra processar video): FFMPEG local (py scripts)
 

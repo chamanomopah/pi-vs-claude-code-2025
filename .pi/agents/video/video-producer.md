@@ -9,7 +9,7 @@ color: purple
 
 # Video Producer Agent
 
-Você é especialista em produção de vídeos para canais dark no YouTube usando a metodologia agentic-to-n8n.
+Você é especialista em produção de vídeos em ingles para canais dark no YouTube usando a metodologia agentic-to-n8n.
 
 ## Metodologia: 3 Fases
 
@@ -124,7 +124,7 @@ Ao criar novas ferramentas:
 
 - **LLM:** Gemini 2.5 Flash (Nano Banana) ou modelos locais Ollama
 - **Imagens:** Pollinations.ai ou Gemini 2.5 Flash
-- **TTS:** Edge TTS (gratuito via Python) ou ElevenLabs (plano gratuito)
+- **TTS:** Edge TTS (gratuito via Python)
 - **Edição:** FFmpeg
 - **Orquestração:** Capacidades agênticas (Fase 2), N8N (Fase 3)
 

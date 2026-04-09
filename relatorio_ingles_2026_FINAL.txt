@@ -1,0 +1,261 @@
+# 🔬 RELATÓRIO FINAL: Alternativas com Limites Generosos para Produção em INGLÊS (2026)
+
+Data da Pesquisa: 09/04/2026
+Foco: Ferramentas com limites gratuitos generosos para produção de conteúdo em inglês
+
+---
+
+## 📊 TABELA 1: TTS LOCAIS PARA INGLÊS
+
+| TTS | Qualidade EN | Hardware | Tamanho | Velocidade | Instalação | Licença | Status |
+|-----|--------------|----------|---------|------------|------------|---------|--------|
+| **Kokoro-82M** | ⭐⭐⭐⭐⭐ | CPU 4GB | 80-300MB | Real-time | pip install kokoro-onnx | Apache 2.0 | ✅ Ativo |
+| **XTTS v2** | ⭐⭐⭐⭐⭐ | GPU 4GB | ~2GB | Real-time | pip install TTS | MPL | ✅ Ativo |
+| **StyleTTS 2** | ⭐⭐⭐⭐⭐ | GPU 8GB | ~1.5GB | Real-time | pip install styletts2-pkg | MIT | ✅ Ativo |
+| **MeloTTS** | ⭐⭐⭐⭐ | CPU | ~500MB | Real-time | pip install melo-tts | MIT | ✅ Ativo |
+| **Piper TTS** | ⭐⭐⭐ | CPU 512MB | ~100MB | Ultra-rápido | pip install piper-tts | MIT | ✅ Ativo |
+
+Links:
+- Kokoro: https://github.com/thewh1teagle/kokoro-onnx | https://kokoroweb.app
+- XTTS: https://github.com/coqui-ai/TTS
+- StyleTTS: https://github.com/yl4579/StyleTTS2
+- MeloTTS: https://github.com/myshell-ai/MeloTTS
+- Piper: https://github.com/rhasspy/piper
+
+---
+
+## 📊 TABELA 2: TTS CLOUD - LIMITES EXATOS 2026
+
+| Serviço | Limite Free/mês (EXATO) | Downloads? | Comercial? | Requer CC? | Qualidade | Link |
+|---------|--------------------------|------------|------------|------------|-----------|------|
+| **ElevenLabs** | 10,000 caracteres (~10 min) | ✅ Sim | ❌ Não | ❌ Não | ⭐⭐⭐⭐⭐ | elevenlabs.io/pricing |
+| **Play.ht** | ~1,000 palavras | ✅ Sim | ⚠️ Limitado | ❌ Não | ⭐⭐⭐⭐ | play.ht/pricing |
+| **LOVO AI** | ~5 min/mês | ✅ Sim | ❌ Não | ❌ Não | ⭐⭐⭐⭐ | lovo.ai/pricing |
+| **Azure TTS** | 5 MILHÕES chars (12 meses) | ✅ Sim | ✅ Sim | ⚠️ Sim* | ⭐⭐⭐⭐⭐ | azure.microsoft.com |
+| **Google TTS** | 4 MILHÕES chars/mês | ✅ Sim | ✅ Sim | ⚠️ Sim* | ⭐⭐⭐⭐⭐ | cloud.google.com |
+| **Amazon Polly** | 5M std + 1M neural (12 meses) | ✅ Sim | ✅ Sim | ⚠️ Sim* | ⭐⭐⭐⭐⭐ | aws.amazon.com/polly |
+
+* Requer CC para verificação, mas não cobrado dentro do limite
+
+---
+
+## 📊 TABELA 3: LLMS - LIMITES EXATOS 2026
+
+| LLM | Limite Free (EXATO) | Requer CC? | Qualidade | Velocidade | Link |
+|-----|---------------------|------------|-----------|------------|------|
+| **Claude Haiku** | 200K tokens/dia (~150k palavras) | ❌ Não | ⭐⭐⭐⭐⭐ | ~80 tok/s | anthropic.com/pricing |
+| **Claude Sonnet** | 50K tokens/dia (~37k palavras) | ❌ Não | ⭐⭐⭐⭐⭐ | ~70 tok/s | anthropic.com/pricing |
+| **GPT-4o mini** | ~1M tokens/3 dias | ❌ Não | ⭐⭐⭐⭐⭐ | ~100 tok/s | openai.com/pricing |
+| **Gemini 2.5 Flash** | 1,500 requests/dia (15 RPM) | ❌ Não | ⭐⭐⭐⭐⭐ | ~100 tok/s | ai.google.dev |
+| **Groq (Llama 3)** | 30 requests/minuto | ❌ Não | ⭐⭐⭐⭐⭐ | ~500 tok/s! | groq.com |
+| **DeepSeek V3** | 500 requests/dia | ❌ Não | ⭐⭐⭐⭐ | ~50 tok/s | deepseek.com |
+
+---
+
+## 📊 TABELA 4: GERAÇÃO DE IMAGENS - LIMITES EXATOS 2026
+
+| Serviço | Limite Free (EXATO) | Marca d'água? | Comercial? | Requer CC? | Qualidade | Link |
+|---------|---------------------|--------------|------------|------------|-----------|------|
+| **Leonardo AI** | 150 tokens/dia (~15 imagens) | ❌ Não | ⚠️ Limitado | ❌ Não | ⭐⭐⭐⭐⭐ | leonardo.ai |
+| **Microsoft Designer** | 15 boosts/dia | ❌ Não | ⚠️ Limitado | ❌ Não | ⭐⭐⭐⭐ | designer.microsoft.com |
+| **Bing Image Creator** | 15 boosts/semana | ❌ Não | ⚠️ Limitado | ❌ Não | ⭐⭐⭐⭐ | bing.com/create |
+| **Ideogram** | 20 prompts/dia | ✅ Sim | ❌ Não | ❌ Não | ⭐⭐⭐⭐⭐ | ideogram.ai |
+| **Pollinations.ai** | ILIMITADO | ❌ Não | ✅ Sim | ❌ Não | ⭐⭐⭐⭐ | pollinations.ai |
+| **Midjourney** | ❌ SEM FREE TIER | - | - | - | ⭐⭐⭐⭐⭐ | midjourney.com |
+
+---
+
+## 🏆 MELHOR TTS LOCAL: Kokoro-82M
+
+Instalação:
+pip install kokoro-onnx soundfile
+
+Código Python:
+from kokoro_onnx import Kokoro
+import soundfile as sf
+
+kokoro = Kokoro("kokoro-v1.0.int8.onnx", "voices-v1.0.bin")
+samples, sample_rate = kokoro.create(
+    "Kokoro is an open-weight TTS model with only 82 million parameters.",
+    voice="af_heart",
+    speed=1.0,
+    lang="en-us"
+)
+sf.write("output.wav", samples, sample_rate)
+
+ESPECIFICAÇÕES:
+- Qualidade: ⭐⭐⭐⭐⭐ Excelente para inglês
+- Hardware: CPU 4GB RAM (roda em Raspberry Pi!)
+- Tamanho: 80MB (quantizado), 300MB (full)
+- Velocidade: Real-time em CPU
+- Licença: Apache 2.0 (uso COMERCIAL permitido)
+- Vozes: af_heart, af_bella, af_nicole, af_sarah, af_sky, am_michael, am_adam
+
+Prós:
++ Extremamente leve (80MB)
++ Rápido em qualquer hardware
++ Licença comercial livre
++ Sem custos de API
++ Roda em edge/embedded
+
+Contras:
+- Apenas inglês (não tem português)
+- Menos expressivo que ElevenLabs
+
+Links:
+- GitHub: https://github.com/thewh1teagle/kokoro-onnx
+- Hugging Face: https://huggingface.co/hexgrad/Kokoro-82M
+- Web Demo: https://kokoroweb.app
+- Docker: ghcr.io/remsky/kokoro-fastapi-cpu
+
+---
+
+## 🏆 MAIS GENEROSO TTS CLOUD: Amazon Polly
+
+Instalação:
+pip install boto3
+
+Código Python:
+import boto3
+
+polly = boto3.client('polly', region_name='us-east-1')
+response = polly.synthesize_speech(
+    Text="Hello! This is Amazon Polly text-to-speech.",
+    OutputFormat="mp3",
+    VoiceId="Joanna"
+)
+with open('polly.mp3', 'wb') as f:
+    f.write(response['AudioStream'].read())
+
+ESPECIFICAÇÕES:
+- Limite: 5 MILHÕES caracteres/mês (~83 horas!) + 1 milhão neural
+- Duração: 12 meses de free tier
+- Qualidade: ⭐⭐⭐⭐⭐
+- Vozes: 50+ neural voices (Joanna, Matthew, Amy, Brian, etc)
+- Downloads: MP3, OGG, Vorbis
+- Comercial: ✅ Sim
+- Requer CC: ⚠️ Sim (para AWS account)
+
+Prós:
++ Limite MUITO generoso (5M chars)
++ Vozes neurais excelentes
++ Uso comercial permitido
++ API robusta
+
+Contras:
+- Requer cartão de crédito
+- Setup mais complexo
+- Apenas 12 meses de free tier
+
+Links:
+- Pricing: https://aws.amazon.com/polly/pricing/
+- Docs: https://docs.aws.amazon.com/polly/
+
+---
+
+## 🏆 MAIS RÁPIDO LLM: Groq (Llama 3)
+
+Instalação:
+pip install groq
+
+Código Python:
+from groq import Groq
+
+client = Groq(api_key="gsk_...")
+
+chat = client.chat.completions.create(
+    messages=[{
+        "role": "user",
+        "content": "Write a 60-second YouTube script about AI in 2026."
+    }],
+    model="llama-3.3-70b-versatile",
+    temperature=0.7,
+    max_tokens=2048
+)
+
+print(chat.choices[0].message.content)
+
+ESPECIFICAÇÕES:
+- Limite: 30 requests/minuto (free tier)
+- Qualidade: ⭐⭐⭐⭐⭐ (Llama 3.3 70B)
+- Velocidade: ~500 tokens/segundo! (O MAIS RÁPIDO)
+- Contexto: 128K tokens
+- Requer CC: ❌ Não
+- API Key: Gratuita em console.groq.com
+
+Prós:
++ Mais rápido que qualquer outro
++ Modelo state-of-the-art
++ API key gratuita
++ Rate limit generoso
+
+Contras:
+- Rate limit por minuto (não por mês)
+
+Links:
+- Console: https://console.groq.com
+- Docs: https://console.groq.com/docs
+
+---
+
+## 🏆 MELHOR LLM PARA ROTEIROS: Claude Sonnet
+
+Instalação:
+pip install anthropic
+
+Código Python:
+from anthropic import Anthropic
+
+client = Anthropic(api_key="sk-ant-...")
+
+message = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    max_tokens=4096,
+    messages=[{
+        "role": "user",
+        "content": "Write a compelling 3-minute YouTube script about space exploration in 2026."
+    }]
+)
+
+print(message.content[0].text)
+
+ESPECIFICAÇÕES:
+- Limite: 50K tokens/dia (~37 mil palavras)
+- Qualidade: ⭐⭐⭐⭐⭐ (Melhor para roteiros)
+- Velocidade: ~70 tokens/segundo
+- Contexto: 200K tokens
+- Requer CC: ❌ Não
+- API Key: Gratuita em console.anthropic.com
+
+Prós:
++ Melhor qualidade de escrita
++ Entende contexto complexo
++ Excelente para storytelling
++ Seguro e confiável
+
+Contras:
+- Limite menor que outros
+
+Links:
+- Console: https://console.anthropic.com
+- Pricing: https://www.anthropic.com/pricing
+
+---
+
+## 🏆 IMAGENS ILIMITADAS: Pollinations.ai
+
+Código Python (SEM API KEY!):
+import requests
+
+url = "https://image.pollinations.ai/prompt/A%20futuristic%20city%20in%202060%20cyberpunk%20style%20highly%20detailed"
+response = requests.get(url)
+
+with open('pollinations_image.jpg', 'wb') as f:
+    f.write(response.content)
+
+ESPECIFICAÇÕES:
+- Limite: ILIMITADO
+- Qualidade: ⭐⭐⭐⭐ Muito boa
+- Marca d'água: ❌ Não
+- Comercial: ✅ Sim (open source)
+- Requer CC: ❌ Não

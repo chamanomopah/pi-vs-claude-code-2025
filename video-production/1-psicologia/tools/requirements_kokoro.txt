@@ -1,0 +1,10 @@
+# Dependências para TTS
+# Instale com: pip install -r requirements_kokoro.txt
+
+# Opção 1: Edge TTS (recomendado - gratuito e funciona offline)
+edge-tts>=6.1.0
+
+# Opção 2: Para usar kokoro-onnx (requer arquivos de vozes específicos)
+# kokoro-onnx>=0.1.0
+# soundfile>=0.12.0
+# numpy>=1.24.0
