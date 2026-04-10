@@ -1,10 +1,15 @@
-# Dependências para TTS
-# Instale com: pip install -r requirements_kokoro.txt
+# Kokoro-82M TTS Requirements
+# ============================
+# Dependências para executar o script kokoro_tts.py
 
-# Opção 1: Edge TTS (recomendado - gratuito e funciona offline)
-edge-tts>=6.1.0
+# Biblioteca Kokoro (PyTorch) - baixa modelos automaticamente do HuggingFace
+kokoro>=0.9.2
 
-# Opção 2: Para usar kokoro-onnx (requer arquivos de vozes específicos)
-# kokoro-onnx>=0.1.0
-# soundfile>=0.12.0
-# numpy>=1.24.0
+# SoundFile para salvar arquivos de áudio WAV
+soundfile>=0.12.0
+
+# PyTorch (backend para Kokoro)
+torch>=2.0.0
+
+# NumPy para manipulação de arrays de áudio
+numpy>=1.24.0

@@ -1,0 +1,9 @@
+# Edge TTS Requirements
+# =====================
+# Dependências para executar o script edge_tts.py
+
+# Edge TTS - Microsoft Edge Text-to-Speech (gratuito, funciona offline)
+edge-tts>=6.1.0
+
+# Opcional: Para converter MP3 para WAV se necessário
+# pydub>=0.25.0
