@@ -20,7 +20,7 @@ if sys.platform == 'win32':
 TEXTO = """Hello! This is a test of Kokoro text-to-speech system.
 This solution uses Conda with Python 3.12 for maximum compatibility."""
 
-VOZ = "af_heart"  # Opções: af_heart, af_bella, af_sarah, am_adam, am_michael, bf_emma
+VOZ = "af_heart"  # Opções: af_heart, af_bella, af_sarah, am_michael, bf_emma
 VELOCIDADE = 1.0  # 0.5 a 2.0 (1.0 = normal)
 ARQUIVO_SAIDA = "audio_kokoro.wav"
 # ==========================
