@@ -1,8 +1,0 @@
-# Requirements para Kokoro TTS com Conda (Python 3.12)
-# Instale com: pip install -r requirements_kokoro_conda.txt
-#
-# Ambiente necessário: conda create --name kokoro python=3.12
-
-kokoro>=0.9.4
-soundfile>=0.12.0
-torch>=2.0.0

@@ -43,6 +43,8 @@ inves de tentar criar um sistema completo e complexo de uma vez, podemos constru
 
 ## custo 100% gratuito
 
+precisa ser os melhores de abril 2026, (o seja não pode ser modelos desatualizados ou antigos, que sejam de 2 anos atras ou mais, quero modelos atuais, eficientes e de alta qualidade)
+
 open source ou closed source generoso gratuito, o foco é na eficiência e na qualidade do processo. closed source a ideia é utilizar varias contas gratuitas pra sempre ter limite disponivel
 
 na pratica precisa ser um processo que seja 100% gratuito pra não ter limite de uso, e que seja eficiente o suficiente para produzir vídeos de alta qualidade de forma rápida e automatizada. e o dinheiro não seja um limitador para a produção, o foco é na eficiência e na qualidade do processo, utilizando as capacidades agênticas para criar um sistema que seja fácil de usar e escalável.
