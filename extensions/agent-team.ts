@@ -220,6 +220,7 @@ export default function (pi: ExtensionAPI) {
 	let widgetCtx: any;
 	let sessionDir = "";
 	let contextWindow = 0;
+	let clearAgentsSession = true;  // DEFAULT: true (auto-clear ligado)
 
 	function loadAgents(cwd: string) {
 		// Create session storage dir
@@ -562,6 +563,18 @@ export default function (pi: ExtensionAPI) {
 					state.sessionFile = agentSessionFile;
 				}
 
+				// Auto-clear se modo ativado
+				if (code === 0 && clearAgentsSession) {
+					try {
+						if (existsSync(agentSessionFile)) {
+							unlinkSync(agentSessionFile);
+							state.sessionFile = null;  // Remove marca de resume
+						}
+					} catch (err) {
+						// Silencioso
+					}
+				}
+
 				const full = textChunks.join("");
 				state.lastWork = full.split("\n").filter((l: string) => l.trim()).pop() || "";
 				updateWidget();
@@ -763,6 +776,20 @@ export default function (pi: ExtensionAPI) {
 		},
 	});
 
+	pi.registerCommand("agents-auto-clear", {
+		description: "Toggle auto-clear agent sessions (default: ON)",
+		handler: async (_args, ctx) => {
+			clearAgentsSession = !clearAgentsSession;
+			const status = clearAgentsSession ? "ON" : "OFF";
+			const mode = clearAgentsSession ? "auto-clear" : "resume";
+			ctx.ui.notify(
+				`Agent sessions: ${status} (${mode} mode)`,
+				clearAgentsSession ? "success" : "warning"
+			);
+			updateWidget();
+		},
+	});
+
 	// ── Keyboard Shortcuts ───────────────────────
 	// NOTE: Shortcuts are now registered in session_start using registerShortcuts()
 	// from .pi/agents/shortcuts.yaml. The old registration below is kept as fallback.
@@ -803,6 +830,11 @@ export default function (pi: ExtensionAPI) {
 		const teamMembers = Array.from(agentStates.values()).map(s => displayName(s.def.name)).join(", ");
 		const agentsWithSkills = Array.from(agentStates.values()).filter(s => s.def.skills.length > 0);
 
+		// Memory policy based on auto-clear mode
+		const resumeInstruction = clearAgentsSession
+			? `**MEMORY POLICY:** Agents do NOT retain context between tasks. Each dispatch starts FRESH. Do NOT use phrases like "continue where you left off" or "as you were working on earlier."`
+			: `**MEMORY POLICY:** Agents retain context. You CAN say "continue where you left off".`;
+
 		return {
 			systemPrompt: `You are a dispatcher agent. You coordinate specialist agents to accomplish tasks.
 You do NOT have direct access to the codebase. You MUST delegate all work through
@@ -827,6 +859,8 @@ You can ONLY dispatch to agents listed below. Do not attempt to dispatch to agen
 - You can dispatch the same agent multiple times with different tasks
 - Keep tasks focused — one clear objective per dispatch
 - Pay attention to agent skills — they have specialized capabilities loaded
+
+${resumeInstruction}
 
 ## Agents (with skills)
 
@@ -881,6 +915,20 @@ ${agentCatalog}`,
 				handler: async (ctx) => {
 					if (!ctx.hasUI) return;
 					cycleTeam(-1);
+				},
+			},
+			"toggle-auto-clear": {
+				description: "Toggle auto-clear agent sessions",
+				handler: async (ctx) => {
+					if (!ctx.hasUI) return;
+					clearAgentsSession = !clearAgentsSession;
+					const status = clearAgentsSession ? "ON" : "OFF";
+					const mode = clearAgentsSession ? "auto-clear" : "resume";
+					ctx.ui.notify(
+						`Agent sessions: ${status} (${mode} mode)`,
+						clearAgentsSession ? "success" : "warning"
+					);
+					updateWidget();
 				},
 			},
 		}, _ctx.cwd);

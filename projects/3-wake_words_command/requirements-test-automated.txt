@@ -1,0 +1,25 @@
+# Requirements for Automated Audio Testing
+# Install with: pip install -r requirements-test-automated.txt
+
+# Core Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-benchmark>=4.0.0
+pytest-html>=3.2.0
+
+# TTS (Text-to-Speech)
+pyttsx3>=2.90
+edge-tts>=6.1.9
+
+# Audio Processing
+soundfile>=0.12.0
+scipy>=1.10.0
+
+# Utilities
+editdistance>=0.6.0
+
+# Note: The following should already be installed in the main project
+# - numpy>=1.24.0
+# - pvporcupine
+# - vosk
+# - sounddevice

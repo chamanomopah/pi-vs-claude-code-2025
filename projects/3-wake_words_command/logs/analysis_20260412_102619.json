@@ -1,0 +1,543 @@
+{
+  "session_info": {
+    "id": "20260412_102619",
+    "start": "2026-04-12T10:26:19.958083",
+    "duration_seconds": 6.683245
+  },
+  "statistics": {
+    "session_id": "20260412_102619",
+    "session_start": "2026-04-12T10:26:19.958083",
+    "total_events": 99,
+    "counters": {
+      "audio_frames": 0,
+      "wake_words": 0,
+      "transcriptions": 0,
+      "commands": 0,
+      "system_metrics": 6,
+      "errors": 0
+    },
+    "audio": {
+      "total_frames": 96,
+      "voice_frames": 0,
+      "voice_percentage": 0.0,
+      "avg_amplitude": 0.007623990376790364
+    },
+    "transcriptions": {
+      "total": 0,
+      "avg_confidence": 0
+    },
+    "commands": {
+      "total": 0,
+      "successful": 0,
+      "success_rate": 0
+    }
+  },
+  "events_summary": {
+    "by_type": {
+      "audio_frames": 0,
+      "wake_words": 0,
+      "transcriptions": 0,
+      "commands": 0,
+      "system_metrics": 6,
+      "errors": 0
+    },
+    "total": 99
+  },
+  "timeline": [
+    {
+      "timestamp": "2026-04-12T10:26:23.043087",
+      "type": "audio_frame",
+      "summary": "Frame 1: silence (amp: 0.0000)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.065655",
+      "type": "system_metrics",
+      "summary": "CPU: 2.2%, RAM: 17435MB"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.073021",
+      "type": "audio_frame",
+      "summary": "Frame 2: silence (amp: 0.0000)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.102987",
+      "type": "audio_frame",
+      "summary": "Frame 3: silence (amp: 0.0001)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.132968",
+      "type": "audio_frame",
+      "summary": "Frame 4: silence (amp: 0.0001)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.173099",
+      "type": "audio_frame",
+      "summary": "Frame 5: silence (amp: 0.0002)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.203106",
+      "type": "audio_frame",
+      "summary": "Frame 6: silence (amp: 0.0005)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.232933",
+      "type": "audio_frame",
+      "summary": "Frame 7: silence (amp: 0.0008)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.262943",
+      "type": "audio_frame",
+      "summary": "Frame 8: silence (amp: 0.0014)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.292958",
+      "type": "audio_frame",
+      "summary": "Frame 9: silence (amp: 0.0024)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.332933",
+      "type": "audio_frame",
+      "summary": "Frame 10: silence (amp: 0.0033)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.362946",
+      "type": "audio_frame",
+      "summary": "Frame 11: silence (amp: 0.0037)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.393000",
+      "type": "audio_frame",
+      "summary": "Frame 12: silence (amp: 0.0050)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.422953",
+      "type": "audio_frame",
+      "summary": "Frame 13: silence (amp: 0.0058)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.453033",
+      "type": "audio_frame",
+      "summary": "Frame 14: silence (amp: 0.0058)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.492973",
+      "type": "audio_frame",
+      "summary": "Frame 15: silence (amp: 0.0063)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.522929",
+      "type": "audio_frame",
+      "summary": "Frame 16: silence (amp: 0.0062)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.552965",
+      "type": "audio_frame",
+      "summary": "Frame 17: silence (amp: 0.0106)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.582947",
+      "type": "audio_frame",
+      "summary": "Frame 18: silence (amp: 0.0096)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.612932",
+      "type": "audio_frame",
+      "summary": "Frame 19: silence (amp: 0.0084)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.652990",
+      "type": "audio_frame",
+      "summary": "Frame 20: silence (amp: 0.0089)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.682939",
+      "type": "audio_frame",
+      "summary": "Frame 21: silence (amp: 0.0081)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.712973",
+      "type": "audio_frame",
+      "summary": "Frame 22: silence (amp: 0.0091)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.743017",
+      "type": "audio_frame",
+      "summary": "Frame 23: silence (amp: 0.0089)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.772993",
+      "type": "audio_frame",
+      "summary": "Frame 24: silence (amp: 0.0079)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.812994",
+      "type": "audio_frame",
+      "summary": "Frame 25: silence (amp: 0.0073)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.843035",
+      "type": "audio_frame",
+      "summary": "Frame 26: silence (amp: 0.0094)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.873045",
+      "type": "audio_frame",
+      "summary": "Frame 27: silence (amp: 0.0091)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.903019",
+      "type": "audio_frame",
+      "summary": "Frame 28: silence (amp: 0.0083)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.932993",
+      "type": "audio_frame",
+      "summary": "Frame 29: silence (amp: 0.0083)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:23.972977",
+      "type": "audio_frame",
+      "summary": "Frame 30: silence (amp: 0.0085)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.002955",
+      "type": "audio_frame",
+      "summary": "Frame 31: silence (amp: 0.0084)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.032949",
+      "type": "audio_frame",
+      "summary": "Frame 32: silence (amp: 0.0076)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.062983",
+      "type": "audio_frame",
+      "summary": "Frame 33: silence (amp: 0.0080)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.092937",
+      "type": "audio_frame",
+      "summary": "Frame 34: silence (amp: 0.0086)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.132985",
+      "type": "audio_frame",
+      "summary": "Frame 35: silence (amp: 0.0079)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.162970",
+      "type": "audio_frame",
+      "summary": "Frame 36: silence (amp: 0.0083)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.173142",
+      "type": "system_metrics",
+      "summary": "CPU: 0.5%, RAM: 17429MB"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.192968",
+      "type": "audio_frame",
+      "summary": "Frame 37: silence (amp: 0.0083)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.222950",
+      "type": "audio_frame",
+      "summary": "Frame 38: silence (amp: 0.0080)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.252918",
+      "type": "audio_frame",
+      "summary": "Frame 39: silence (amp: 0.0102)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.292937",
+      "type": "audio_frame",
+      "summary": "Frame 40: silence (amp: 0.0108)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.322960",
+      "type": "audio_frame",
+      "summary": "Frame 41: silence (amp: 0.0083)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.352940",
+      "type": "audio_frame",
+      "summary": "Frame 42: silence (amp: 0.0074)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.382914",
+      "type": "audio_frame",
+      "summary": "Frame 43: silence (amp: 0.0092)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.412965",
+      "type": "audio_frame",
+      "summary": "Frame 44: silence (amp: 0.0091)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.453038",
+      "type": "audio_frame",
+      "summary": "Frame 45: silence (amp: 0.0100)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.483015",
+      "type": "audio_frame",
+      "summary": "Frame 46: silence (amp: 0.0081)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.513005",
+      "type": "audio_frame",
+      "summary": "Frame 47: silence (amp: 0.0096)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.542942",
+      "type": "audio_frame",
+      "summary": "Frame 48: silence (amp: 0.0090)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.572952",
+      "type": "audio_frame",
+      "summary": "Frame 49: silence (amp: 0.0092)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.613029",
+      "type": "audio_frame",
+      "summary": "Frame 50: silence (amp: 0.0084)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.642942",
+      "type": "audio_frame",
+      "summary": "Frame 51: silence (amp: 0.0086)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.672982",
+      "type": "audio_frame",
+      "summary": "Frame 52: silence (amp: 0.0084)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.702932",
+      "type": "audio_frame",
+      "summary": "Frame 53: silence (amp: 0.0091)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.732912",
+      "type": "audio_frame",
+      "summary": "Frame 54: silence (amp: 0.0081)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.772945",
+      "type": "audio_frame",
+      "summary": "Frame 55: silence (amp: 0.0076)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.803041",
+      "type": "audio_frame",
+      "summary": "Frame 56: silence (amp: 0.0079)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.832997",
+      "type": "audio_frame",
+      "summary": "Frame 57: silence (amp: 0.0078)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.863043",
+      "type": "audio_frame",
+      "summary": "Frame 58: silence (amp: 0.0081)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.893041",
+      "type": "audio_frame",
+      "summary": "Frame 59: silence (amp: 0.0080)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.932964",
+      "type": "audio_frame",
+      "summary": "Frame 60: silence (amp: 0.0072)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.962983",
+      "type": "audio_frame",
+      "summary": "Frame 61: silence (amp: 0.0078)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:24.992992",
+      "type": "audio_frame",
+      "summary": "Frame 62: silence (amp: 0.0092)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.023000",
+      "type": "audio_frame",
+      "summary": "Frame 63: silence (amp: 0.0071)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.052990",
+      "type": "audio_frame",
+      "summary": "Frame 64: silence (amp: 0.0077)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.092977",
+      "type": "audio_frame",
+      "summary": "Frame 65: silence (amp: 0.0085)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.122961",
+      "type": "audio_frame",
+      "summary": "Frame 66: silence (amp: 0.0094)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.152921",
+      "type": "audio_frame",
+      "summary": "Frame 67: silence (amp: 0.0084)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.183238",
+      "type": "audio_frame",
+      "summary": "Frame 68: silence (amp: 0.0073)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.212997",
+      "type": "audio_frame",
+      "summary": "Frame 69: silence (amp: 0.0096)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.253055",
+      "type": "audio_frame",
+      "summary": "Frame 70: silence (amp: 0.0083)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.280082",
+      "type": "system_metrics",
+      "summary": "CPU: 3.1%, RAM: 17451MB"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.283420",
+      "type": "audio_frame",
+      "summary": "Frame 71: silence (amp: 0.0092)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.312997",
+      "type": "audio_frame",
+      "summary": "Frame 72: silence (amp: 0.0096)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.342950",
+      "type": "audio_frame",
+      "summary": "Frame 73: silence (amp: 0.0085)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.373088",
+      "type": "audio_frame",
+      "summary": "Frame 74: silence (amp: 0.0090)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.413040",
+      "type": "audio_frame",
+      "summary": "Frame 75: silence (amp: 0.0084)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.442988",
+      "type": "audio_frame",
+      "summary": "Frame 76: silence (amp: 0.0093)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.472965",
+      "type": "audio_frame",
+      "summary": "Frame 77: silence (amp: 0.0079)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.502991",
+      "type": "audio_frame",
+      "summary": "Frame 78: silence (amp: 0.0096)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.533010",
+      "type": "audio_frame",
+      "summary": "Frame 79: silence (amp: 0.0094)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.572981",
+      "type": "audio_frame",
+      "summary": "Frame 80: silence (amp: 0.0099)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.602979",
+      "type": "audio_frame",
+      "summary": "Frame 81: silence (amp: 0.0097)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.632958",
+      "type": "audio_frame",
+      "summary": "Frame 82: silence (amp: 0.0089)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.662935",
+      "type": "audio_frame",
+      "summary": "Frame 83: silence (amp: 0.0094)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.692933",
+      "type": "audio_frame",
+      "summary": "Frame 84: silence (amp: 0.0093)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.732973",
+      "type": "audio_frame",
+      "summary": "Frame 85: silence (amp: 0.0082)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.762921",
+      "type": "audio_frame",
+      "summary": "Frame 86: silence (amp: 0.0090)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.792921",
+      "type": "audio_frame",
+      "summary": "Frame 87: silence (amp: 0.0089)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.822977",
+      "type": "audio_frame",
+      "summary": "Frame 88: silence (amp: 0.0079)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.852935",
+      "type": "audio_frame",
+      "summary": "Frame 89: silence (amp: 0.0088)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.892978",
+      "type": "audio_frame",
+      "summary": "Frame 90: silence (amp: 0.0077)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.923239",
+      "type": "audio_frame",
+      "summary": "Frame 91: silence (amp: 0.0086)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.953005",
+      "type": "audio_frame",
+      "summary": "Frame 92: silence (amp: 0.0091)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:25.982979",
+      "type": "audio_frame",
+      "summary": "Frame 93: silence (amp: 0.0084)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:26.013008",
+      "type": "audio_frame",
+      "summary": "Frame 94: silence (amp: 0.0086)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:26.052984",
+      "type": "audio_frame",
+      "summary": "Frame 95: silence (amp: 0.0076)"
+    },
+    {
+      "timestamp": "2026-04-12T10:26:26.082948",
+      "type": "audio_frame",
+      "summary": "Frame 96: silence (amp: 0.0084)"
+    }
+  ]
+}

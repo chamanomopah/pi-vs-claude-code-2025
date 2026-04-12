@@ -29,3 +29,124 @@
 2026-04-12 10:19:02 | INFO     | [AUDIO_FRAME] #   22 | Amp:0.008606 | RMS:0.005321 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
 2026-04-12 10:19:03 | INFO     | [AUDIO_FRAME] #   23 | Amp:0.008911 | RMS:0.005424 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
 2026-04-12 10:19:03 | INFO     | [AUDIO_FRAME] #   24 | Amp:0.007965 | RMS:0.005027 | Samples:  512 | Status:SILENCE | Bar:[███░░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:03 | INFO     | [AUDIO_FRAME] #   25 | Amp:0.008789 | RMS:0.005012 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:03 | INFO     | [AUDIO_FRAME] #   26 | Amp:0.007965 | RMS:0.004506 | Samples:  512 | Status:SILENCE | Bar:[███░░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:03 | INFO     | [AUDIO_FRAME] #   27 | Amp:0.007385 | RMS:0.004732 | Samples:  512 | Status:SILENCE | Bar:[███░░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:03 | INFO     | [AUDIO_FRAME] #   28 | Amp:0.007965 | RMS:0.004608 | Samples:  512 | Status:SILENCE | Bar:[███░░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:04 | INFO     | [AUDIO_FRAME] #   29 | Amp:0.008606 | RMS:0.005279 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:04 | INFO     | [AUDIO_FRAME] #   30 | Amp:0.008606 | RMS:0.004648 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:04 | INFO     | [AUDIO_FRAME] #   31 | Amp:0.008911 | RMS:0.004614 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:05 | INFO     | [MONITOR] Monitoramento em tempo real iniciado (intervalo: 0.5s)
+2026-04-12 10:19:05 | INFO     | [METRIC] Iter:   1 | CPU_PROC:  0.0% | CPU_SYS:  0.0% | RAM_PROC:  37.9MB | RAM_SYS: 26.5% | RAM_LIVRE: 48123MB | THRDS:32
+2026-04-12 10:19:06 | INFO     | [METRIC] Iter:   2 | CPU_PROC:  0.0% | CPU_SYS:  2.3% | RAM_PROC:  38.4MB | RAM_SYS: 26.5% | RAM_LIVRE: 48132MB | THRDS:32
+2026-04-12 10:19:07 | INFO     | [METRIC] Iter:   3 | CPU_PROC:  0.0% | CPU_SYS:  2.2% | RAM_PROC:  38.4MB | RAM_SYS: 26.5% | RAM_LIVRE: 48140MB | THRDS:32
+2026-04-12 10:19:08 | INFO     | [METRIC] Iter:   4 | CPU_PROC:  0.0% | CPU_SYS:  0.0% | RAM_PROC:  38.4MB | RAM_SYS: 26.4% | RAM_LIVRE: 48145MB | THRDS:32
+2026-04-12 10:19:08 | INFO     | [METRIC] Iter:   5 | CPU_PROC:  0.0% | CPU_SYS:  0.0% | RAM_PROC:  38.4MB | RAM_SYS: 26.5% | RAM_LIVRE: 48133MB | THRDS:32
+2026-04-12 10:19:09 | INFO     | [METRIC] Iter:   6 | CPU_PROC:  0.0% | CPU_SYS:  2.1% | RAM_PROC:  38.4MB | RAM_SYS: 26.5% | RAM_LIVRE: 48143MB | THRDS:32
+2026-04-12 10:19:10 | INFO     | [METRIC] Iter:   7 | CPU_PROC:  0.0% | CPU_SYS:  0.0% | RAM_PROC:  38.4MB | RAM_SYS: 26.5% | RAM_LIVRE: 48134MB | THRDS:32
+2026-04-12 10:19:11 | INFO     | [METRIC] Iter:   8 | CPU_PROC:  0.0% | CPU_SYS:  1.2% | RAM_PROC:  38.4MB | RAM_SYS: 26.5% | RAM_LIVRE: 48140MB | THRDS:32
+2026-04-12 10:19:11 | INFO     | [METRIC] Iter:   9 | CPU_PROC:  0.0% | CPU_SYS:  0.9% | RAM_PROC:  38.4MB | RAM_SYS: 26.5% | RAM_LIVRE: 48138MB | THRDS:32
+2026-04-12 10:19:12 | INFO     | [METRIC] Iter:  10 | CPU_PROC:  0.0% | CPU_SYS:  1.8% | RAM_PROC:  38.4MB | RAM_SYS: 26.4% | RAM_LIVRE: 48156MB | THRDS:32
+2026-04-12 10:19:13 | INFO     | [METRIC] Iter:  11 | CPU_PROC:  0.0% | CPU_SYS:  0.0% | RAM_PROC:  38.4MB | RAM_SYS: 26.4% | RAM_LIVRE: 48157MB | THRDS:32
+2026-04-12 10:19:14 | INFO     | [METRIC] Iter:  12 | CPU_PROC:  0.0% | CPU_SYS:  0.0% | RAM_PROC:  38.4MB | RAM_SYS: 26.4% | RAM_LIVRE: 48154MB | THRDS:32
+2026-04-12 10:19:14 | INFO     | [METRIC] Iter:  13 | CPU_PROC:  0.0% | CPU_SYS:  0.0% | RAM_PROC:  38.4MB | RAM_SYS: 26.4% | RAM_LIVRE: 48144MB | THRDS:32
+2026-04-12 10:19:15 | INFO     | [METRIC] Iter:  14 | CPU_PROC:  0.0% | CPU_SYS:  1.2% | RAM_PROC:  38.4MB | RAM_SYS: 26.4% | RAM_LIVRE: 48172MB | THRDS:32
+2026-04-12 10:19:16 | INFO     | [MONITOR] Monitoramento parado (duração: 10.7s)
+2026-04-12 10:19:16 | INFO     | [MONITOR] Métricas exportadas para: logs\metrics_test.json
+2026-04-12 10:19:17 | INFO     | ============================================================
+2026-04-12 10:19:17 | INFO     | SISTEMA WAKE WORDS - INICIALIZANDO
+2026-04-12 10:19:17 | INFO     | ============================================================
+2026-04-12 10:19:17 | INFO     | 🖥️  CPU: 32 núcleos (16 físicos)
+2026-04-12 10:19:17 | INFO     | 🧠 RAM: 63.92 GB total (16.87 GB usados, 26.4%)
+2026-04-12 10:19:17 | INFO     | 💾 Disco: 930.67 GB total (747.44 GB usados)
+2026-04-12 10:19:17 | INFO     | ------------------------------------------------------------
+2026-04-12 10:19:17 | INFO     | [MONITOR] Monitoramento em tempo real iniciado (intervalo: 0.3s)
+2026-04-12 10:19:17 | INFO     | [METRIC] Iter:   1 | CPU_PROC: 72.7% | CPU_SYS:  1.6% | RAM_PROC:  37.9MB | RAM_SYS: 26.4% | RAM_LIVRE: 48173MB | THRDS:32
+2026-04-12 10:19:18 | INFO     | [METRIC] Iter:   2 | CPU_PROC: 57.6% | CPU_SYS:  2.2% | RAM_PROC:  38.4MB | RAM_SYS: 26.4% | RAM_LIVRE: 48183MB | THRDS:32
+2026-04-12 10:19:19 | INFO     | [METRIC] Iter:   3 | CPU_PROC: 57.5% | CPU_SYS:  2.7% | RAM_PROC:  38.4MB | RAM_SYS: 26.4% | RAM_LIVRE: 48175MB | THRDS:32
+2026-04-12 10:19:19 | INFO     | [METRIC] Iter:   4 | CPU_PROC: 43.1% | CPU_SYS:  2.3% | RAM_PROC:  38.4MB | RAM_SYS: 26.4% | RAM_LIVRE: 48155MB | THRDS:32
+2026-04-12 10:19:20 | INFO     | [METRIC] Iter:   5 | CPU_PROC:  0.0% | CPU_SYS:  1.5% | RAM_PROC:  76.3MB | RAM_SYS: 26.5% | RAM_LIVRE: 48116MB | THRDS:32
+2026-04-12 10:19:21 | INFO     | [METRIC] Iter:   6 | CPU_PROC:  0.0% | CPU_SYS:  0.9% | RAM_PROC:  77.1MB | RAM_SYS: 26.5% | RAM_LIVRE: 48110MB | THRDS:32
+2026-04-12 10:19:21 | INFO     | [METRIC] Iter:   7 | CPU_PROC:  0.0% | CPU_SYS:  0.5% | RAM_PROC:  77.1MB | RAM_SYS: 26.5% | RAM_LIVRE: 48110MB | THRDS:32
+2026-04-12 10:19:22 | INFO     | [METRIC] Iter:   8 | CPU_PROC:  0.0% | CPU_SYS:  0.5% | RAM_PROC:  77.1MB | RAM_SYS: 26.5% | RAM_LIVRE: 48113MB | THRDS:32
+2026-04-12 10:19:22 | INFO     | [METRIC] Iter:   9 | CPU_PROC:  0.0% | CPU_SYS:  0.4% | RAM_PROC:  40.4MB | RAM_SYS: 26.4% | RAM_LIVRE: 48151MB | THRDS:32
+2026-04-12 10:19:23 | INFO     | [METRIC] Iter:  10 | CPU_PROC:  0.0% | CPU_SYS:  0.0% | RAM_PROC:  40.4MB | RAM_SYS: 26.4% | RAM_LIVRE: 48169MB | THRDS:32
+2026-04-12 10:19:23 | INFO     | [METRIC] Iter:  11 | CPU_PROC:  0.0% | CPU_SYS:  0.0% | RAM_PROC:  40.4MB | RAM_SYS: 26.4% | RAM_LIVRE: 48192MB | THRDS:32
+2026-04-12 10:19:24 | INFO     | [METRIC] Iter:  12 | CPU_PROC:  0.0% | CPU_SYS:  0.0% | RAM_PROC:  40.4MB | RAM_SYS: 26.4% | RAM_LIVRE: 48198MB | THRDS:32
+2026-04-12 10:19:24 | INFO     | [MONITOR] Monitoramento parado (duração: 7.6s)
+2026-04-12 10:25:38 | INFO     | ============================================================
+2026-04-12 10:25:38 | INFO     | SISTEMA WAKE WORDS - INICIALIZANDO
+2026-04-12 10:25:38 | INFO     | ============================================================
+2026-04-12 10:25:38 | INFO     | 🖥️  CPU: 32 núcleos (16 físicos)
+2026-04-12 10:25:38 | INFO     | 🧠 RAM: 63.92 GB total (17.07 GB usados, 26.7%)
+2026-04-12 10:25:38 | INFO     | 💾 Disco: 930.67 GB total (747.44 GB usados)
+2026-04-12 10:25:38 | INFO     | ------------------------------------------------------------
+2026-04-12 10:25:38 | INFO     | [AUDIO_FRAME] #    1 | Amp:0.000214 | RMS:0.000104 | Samples:  512 | Status:SILENCE | Bar:[░░░░░░░░░░░░░░░░░░░░]
+2026-04-12 10:25:38 | INFO     | [AUDIO_FRAME] #    2 | Amp:0.002747 | RMS:0.001551 | Samples:  512 | Status:SILENCE | Bar:[█░░░░░░░░░░░░░░░░░░░]
+2026-04-12 10:25:38 | INFO     | [AUDIO_FRAME] #    3 | Amp:0.007507 | RMS:0.003796 | Samples:  512 | Status:SILENCE | Bar:[███░░░░░░░░░░░░░░░░░]
+2026-04-12 10:25:39 | INFO     | [AUDIO_FRAME] #    4 | Amp:0.014221 | RMS:0.005722 | Samples:  512 | Status:VOICE   | Bar:[███████░░░░░░░░░░░░░]
+2026-04-12 10:25:39 | INFO     | [AUDIO_FRAME] #    5 | Amp:0.010956 | RMS:0.006031 | Samples:  512 | Status:VOICE   | Bar:[█████░░░░░░░░░░░░░░░]
+2026-04-12 10:25:39 | INFO     | [AUDIO_FRAME] #    6 | Amp:0.013947 | RMS:0.005323 | Samples:  512 | Status:VOICE   | Bar:[██████░░░░░░░░░░░░░░]
+2026-04-12 10:25:39 | INFO     | [AUDIO_FRAME] #    7 | Amp:0.010834 | RMS:0.004432 | Samples:  512 | Status:VOICE   | Bar:[█████░░░░░░░░░░░░░░░]
+2026-04-12 10:25:39 | INFO     | [AUDIO_FRAME] #    8 | Amp:0.010132 | RMS:0.004354 | Samples:  512 | Status:VOICE   | Bar:[█████░░░░░░░░░░░░░░░]
+2026-04-12 10:25:39 | INFO     | [AUDIO_FRAME] #    9 | Amp:0.009125 | RMS:0.004809 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:25:40 | INFO     | [AUDIO_FRAME] #   10 | Amp:0.013550 | RMS:0.006417 | Samples:  512 | Status:VOICE   | Bar:[██████░░░░░░░░░░░░░░]
+2026-04-12 10:25:40 | INFO     | [AUDIO_FRAME] #   11 | Amp:0.012604 | RMS:0.004288 | Samples:  512 | Status:VOICE   | Bar:[██████░░░░░░░░░░░░░░]
+2026-04-12 10:25:40 | INFO     | [AUDIO_FRAME] #   12 | Amp:0.010925 | RMS:0.006230 | Samples:  512 | Status:VOICE   | Bar:[█████░░░░░░░░░░░░░░░]
+2026-04-12 10:25:40 | INFO     | [AUDIO_FRAME] #   13 | Amp:0.008240 | RMS:0.004415 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:25:40 | INFO     | [AUDIO_FRAME] #   14 | Amp:0.008972 | RMS:0.005572 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:25:40 | INFO     | [AUDIO_FRAME] #   15 | Amp:0.008911 | RMS:0.004459 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:25:40 | INFO     | [AUDIO_FRAME] #   16 | Amp:0.009949 | RMS:0.004722 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:25:41 | INFO     | [AUDIO_FRAME] #   17 | Amp:0.008148 | RMS:0.004289 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:25:41 | INFO     | [AUDIO_FRAME] #   18 | Amp:0.007751 | RMS:0.004294 | Samples:  512 | Status:SILENCE | Bar:[███░░░░░░░░░░░░░░░░░]
+2026-04-12 10:25:41 | INFO     | [AUDIO_FRAME] #   19 | Amp:0.011963 | RMS:0.005478 | Samples:  512 | Status:VOICE   | Bar:[█████░░░░░░░░░░░░░░░]
+2026-04-12 10:25:41 | INFO     | [AUDIO_FRAME] #   20 | Amp:0.007172 | RMS:0.003851 | Samples:  512 | Status:SILENCE | Bar:[███░░░░░░░░░░░░░░░░░]
+2026-04-12 10:25:41 | INFO     | [AUDIO_FRAME] #   21 | Amp:0.006531 | RMS:0.003433 | Samples:  512 | Status:SILENCE | Bar:[███░░░░░░░░░░░░░░░░░]
+2026-04-12 10:25:41 | INFO     | [AUDIO_FRAME] #   22 | Amp:0.006226 | RMS:0.003369 | Samples:  512 | Status:SILENCE | Bar:[███░░░░░░░░░░░░░░░░░]
+2026-04-12 10:25:42 | INFO     | [AUDIO_FRAME] #   23 | Amp:0.008484 | RMS:0.004193 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:25:42 | INFO     | [AUDIO_FRAME] #   24 | Amp:0.007935 | RMS:0.005210 | Samples:  512 | Status:SILENCE | Bar:[███░░░░░░░░░░░░░░░░░]
+2026-04-12 10:25:42 | INFO     | [AUDIO_FRAME] #   25 | Amp:0.008362 | RMS:0.004600 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:25:42 | INFO     | [AUDIO_FRAME] #   26 | Amp:0.010498 | RMS:0.005051 | Samples:  512 | Status:VOICE   | Bar:[█████░░░░░░░░░░░░░░░]
+2026-04-12 10:25:42 | INFO     | [AUDIO_FRAME] #   27 | Amp:0.007599 | RMS:0.004599 | Samples:  512 | Status:SILENCE | Bar:[███░░░░░░░░░░░░░░░░░]
+2026-04-12 10:25:42 | INFO     | [AUDIO_FRAME] #   28 | Amp:0.008301 | RMS:0.004115 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:25:43 | INFO     | [AUDIO_FRAME] #   29 | Amp:0.047913 | RMS:0.013116 | Samples:  512 | Status:VOICE   | Bar:[████████████████████]
+2026-04-12 10:25:43 | INFO     | [AUDIO_FRAME] #   30 | Amp:0.010223 | RMS:0.004857 | Samples:  512 | Status:VOICE   | Bar:[█████░░░░░░░░░░░░░░░]
+2026-04-12 10:25:43 | INFO     | [AUDIO_FRAME] #   31 | Amp:0.012512 | RMS:0.006147 | Samples:  512 | Status:VOICE   | Bar:[██████░░░░░░░░░░░░░░]
+2026-04-12 10:25:44 | INFO     | [MONITOR] Monitoramento em tempo real iniciado (intervalo: 0.5s)
+2026-04-12 10:25:44 | INFO     | [METRIC] Iter:   1 | CPU_PROC:  0.0% | CPU_SYS:  1.0% | RAM_PROC:  38.0MB | RAM_SYS: 26.7% | RAM_LIVRE: 47967MB | THRDS:32
+2026-04-12 10:25:45 | INFO     | [METRIC] Iter:   2 | CPU_PROC:  0.0% | CPU_SYS:  6.5% | RAM_PROC:  38.8MB | RAM_SYS: 26.8% | RAM_LIVRE: 47922MB | THRDS:32
+2026-04-12 10:25:46 | INFO     | [METRIC] Iter:   3 | CPU_PROC:  0.0% | CPU_SYS:  0.5% | RAM_PROC:  38.8MB | RAM_SYS: 26.8% | RAM_LIVRE: 47908MB | THRDS:32
+2026-04-12 10:25:47 | INFO     | [METRIC] Iter:   4 | CPU_PROC:  0.0% | CPU_SYS:  0.0% | RAM_PROC:  38.5MB | RAM_SYS: 26.8% | RAM_LIVRE: 47920MB | THRDS:32
+2026-04-12 10:25:47 | INFO     | [METRIC] Iter:   5 | CPU_PROC:  0.0% | CPU_SYS:  0.5% | RAM_PROC:  38.5MB | RAM_SYS: 26.8% | RAM_LIVRE: 47918MB | THRDS:32
+2026-04-12 10:25:48 | INFO     | [METRIC] Iter:   6 | CPU_PROC:  0.0% | CPU_SYS:  3.1% | RAM_PROC:  38.6MB | RAM_SYS: 26.8% | RAM_LIVRE: 47931MB | THRDS:32
+2026-04-12 10:25:49 | INFO     | [METRIC] Iter:   7 | CPU_PROC:  0.0% | CPU_SYS:  0.0% | RAM_PROC:  38.6MB | RAM_SYS: 26.8% | RAM_LIVRE: 47930MB | THRDS:32
+2026-04-12 10:25:50 | INFO     | [METRIC] Iter:   8 | CPU_PROC:  0.0% | CPU_SYS:  0.0% | RAM_PROC:  38.6MB | RAM_SYS: 26.8% | RAM_LIVRE: 47926MB | THRDS:32
+2026-04-12 10:25:50 | INFO     | [METRIC] Iter:   9 | CPU_PROC:  0.0% | CPU_SYS:  0.0% | RAM_PROC:  38.6MB | RAM_SYS: 26.8% | RAM_LIVRE: 47929MB | THRDS:32
+2026-04-12 10:25:51 | INFO     | [METRIC] Iter:  10 | CPU_PROC:  0.0% | CPU_SYS:  1.5% | RAM_PROC:  38.6MB | RAM_SYS: 26.8% | RAM_LIVRE: 47924MB | THRDS:32
+2026-04-12 10:25:52 | INFO     | [METRIC] Iter:  11 | CPU_PROC:  0.0% | CPU_SYS:  1.5% | RAM_PROC:  38.6MB | RAM_SYS: 26.8% | RAM_LIVRE: 47914MB | THRDS:32
+2026-04-12 10:25:53 | INFO     | [METRIC] Iter:  12 | CPU_PROC:  0.0% | CPU_SYS:  0.4% | RAM_PROC:  38.6MB | RAM_SYS: 26.8% | RAM_LIVRE: 47924MB | THRDS:32
+2026-04-12 10:25:53 | INFO     | [METRIC] Iter:  13 | CPU_PROC:  0.0% | CPU_SYS:  0.5% | RAM_PROC:  38.6MB | RAM_SYS: 26.8% | RAM_LIVRE: 47916MB | THRDS:32
+2026-04-12 10:25:54 | INFO     | [METRIC] Iter:  14 | CPU_PROC:  0.0% | CPU_SYS:  1.5% | RAM_PROC:  38.6MB | RAM_SYS: 26.9% | RAM_LIVRE: 47879MB | THRDS:32
+2026-04-12 10:25:55 | INFO     | [MONITOR] Monitoramento parado (duração: 10.7s)
+2026-04-12 10:25:55 | INFO     | [MONITOR] Métricas exportadas para: logs\metrics_test.json
+2026-04-12 10:25:56 | INFO     | ============================================================
+2026-04-12 10:25:56 | INFO     | SISTEMA WAKE WORDS - INICIALIZANDO
+2026-04-12 10:25:56 | INFO     | ============================================================
+2026-04-12 10:25:56 | INFO     | 🖥️  CPU: 32 núcleos (16 físicos)
+2026-04-12 10:25:56 | INFO     | 🧠 RAM: 63.92 GB total (17.18 GB usados, 26.9%)
+2026-04-12 10:25:56 | INFO     | 💾 Disco: 930.67 GB total (747.44 GB usados)
+2026-04-12 10:25:56 | INFO     | ------------------------------------------------------------
+2026-04-12 10:25:56 | INFO     | [MONITOR] Monitoramento em tempo real iniciado (intervalo: 0.3s)
+2026-04-12 10:25:56 | INFO     | [METRIC] Iter:   1 | CPU_PROC: 13.5% | CPU_SYS:  1.8% | RAM_PROC:  38.0MB | RAM_SYS: 26.9% | RAM_LIVRE: 47872MB | THRDS:32
+2026-04-12 10:25:57 | INFO     | [METRIC] Iter:   2 | CPU_PROC: 14.3% | CPU_SYS:  1.8% | RAM_PROC:  38.5MB | RAM_SYS: 26.9% | RAM_LIVRE: 47882MB | THRDS:32
+2026-04-12 10:25:58 | INFO     | [METRIC] Iter:   3 | CPU_PROC: 14.3% | CPU_SYS:  2.1% | RAM_PROC:  38.5MB | RAM_SYS: 26.9% | RAM_LIVRE: 47882MB | THRDS:32
+2026-04-12 10:25:58 | INFO     | [METRIC] Iter:   4 | CPU_PROC: 57.5% | CPU_SYS:  3.6% | RAM_PROC:  38.5MB | RAM_SYS: 26.8% | RAM_LIVRE: 47894MB | THRDS:32
+2026-04-12 10:25:59 | INFO     | [METRIC] Iter:   5 | CPU_PROC: 15.6% | CPU_SYS:  1.2% | RAM_PROC:  76.4MB | RAM_SYS: 26.9% | RAM_LIVRE: 47855MB | THRDS:32
+2026-04-12 10:26:00 | INFO     | [METRIC] Iter:   6 | CPU_PROC:  0.0% | CPU_SYS:  0.0% | RAM_PROC:  76.9MB | RAM_SYS: 26.9% | RAM_LIVRE: 47858MB | THRDS:32
+2026-04-12 10:26:00 | INFO     | [METRIC] Iter:   7 | CPU_PROC:  0.0% | CPU_SYS:  4.7% | RAM_PROC:  76.9MB | RAM_SYS: 26.9% | RAM_LIVRE: 47827MB | THRDS:32
+2026-04-12 10:26:01 | INFO     | [METRIC] Iter:   8 | CPU_PROC:  0.0% | CPU_SYS:  0.0% | RAM_PROC:  76.9MB | RAM_SYS: 26.9% | RAM_LIVRE: 47844MB | THRDS:32
+2026-04-12 10:26:01 | INFO     | [METRIC] Iter:   9 | CPU_PROC:  0.0% | CPU_SYS:  0.8% | RAM_PROC:  39.3MB | RAM_SYS: 26.8% | RAM_LIVRE: 47886MB | THRDS:32
+2026-04-12 10:26:02 | INFO     | [METRIC] Iter:  10 | CPU_PROC:  0.0% | CPU_SYS:  0.5% | RAM_PROC:  39.3MB | RAM_SYS: 26.9% | RAM_LIVRE: 47881MB | THRDS:32
+2026-04-12 10:26:02 | INFO     | [METRIC] Iter:  11 | CPU_PROC:  0.0% | CPU_SYS:  0.6% | RAM_PROC:  39.3MB | RAM_SYS: 26.8% | RAM_LIVRE: 47887MB | THRDS:32
+2026-04-12 10:26:03 | INFO     | [METRIC] Iter:  12 | CPU_PROC:  0.0% | CPU_SYS:  0.0% | RAM_PROC:  39.3MB | RAM_SYS: 26.8% | RAM_LIVRE: 47891MB | THRDS:32
+2026-04-12 10:26:03 | INFO     | [MONITOR] Monitoramento parado (duração: 7.5s)
