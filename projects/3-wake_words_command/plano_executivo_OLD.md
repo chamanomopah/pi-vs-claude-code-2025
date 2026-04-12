@@ -17,12 +17,7 @@ Sistema de assistente pessoal por voz (estilo Jarvis) 100% local, sem custos de 
 2. **Produtividade Máxima**: Execução de comandos em < 500ms com configuração simplificada
 3. **Simplicidade de Uso**: Interface intuitiva que permite modificar comandos sem programação
 4. **100% Local e Gratuito**: Zero dependências de APIs pagas ou serviços cloud
-5. vai ter que gerar uma voz que eu geraria no microfone, pq
-eu não quero parar e testar manualemnte , talvez executar
-uma audio no alto falante e pegar pelo micronofone, não sei
-como vai ser, peça pra o researcher ou architect pensar em
-algo, porem tem que ser algo que dÊ pra usar pra esse teste
-atulamente não sei, dê um jeito
+
 
 ### Valor Proposto
 - **Economia de Tempo**: ~30 minutos/dia em tarefas repetitivas

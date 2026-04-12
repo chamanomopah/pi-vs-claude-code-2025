@@ -470,7 +470,7 @@ export default function (pi: ExtensionAPI) {
 		const args = [
 			"--mode", "json",
 			"-p",
-			"--no-extensions",
+			// "--no-extensions",  // Removido para evitar problemas de inicialização
 			"--model", model,
 			"--tools", state.def.tools,
 			"--thinking", "off",
@@ -541,7 +541,10 @@ export default function (pi: ExtensionAPI) {
 			});
 
 			proc.stderr!.setEncoding("utf-8");
-			proc.stderr!.on("data", () => {});
+			let stderrBuffer = "";
+			proc.stderr!.on("data", (chunk) => {
+				stderrBuffer += chunk;
+			});
 
 			proc.on("close", (code) => {
 				if (buffer.trim()) {
@@ -556,10 +559,22 @@ export default function (pi: ExtensionAPI) {
 
 				clearInterval(state.timer);
 				state.elapsed = Date.now() - startTime;
-				state.status = code === 0 ? "done" : "error";
+
+				// Status baseado em texto gerado, não apenas exit code
+				// Pi pode retornar exit code != 0 mesmo em sucesso
+				const hasOutput = textChunks.some(t => t.trim().length > 0);
+				const isSuccess = code === 0 || (code !== null && code !== 130 && hasOutput);
+
+				state.status = isSuccess ? "done" : "error";
+
+				// DEBUG: Log para diagnóstico
+				console.log(`[agent-team] ${state.def.name} exit: ${code}, output: ${hasOutput}, status: ${state.status}`);
+				if (stderrBuffer.trim()) {
+					console.log(`[agent-team] ${state.def.name} stderr: ${stderrBuffer}`);
+				}
 
 				// Mark session file as available for resume
-				if (code === 0) {
+				if (isSuccess) {
 					state.sessionFile = agentSessionFile;
 				}
 
