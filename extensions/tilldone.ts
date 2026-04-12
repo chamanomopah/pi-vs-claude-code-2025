@@ -334,6 +334,7 @@ export default function (pi: ExtensionAPI) {
 
 	pi.on("tool_call", async (event, _ctx) => {
 		if (event.toolName === "tilldone") return { block: false };
+		if (event.toolName === "dispatch_agent") return { block: false };
 
 		const pending = tasks.filter((t) => t.status !== "done");
 		const active = tasks.filter((t) => t.status === "inprogress");

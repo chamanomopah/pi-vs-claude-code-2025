@@ -1,17 +1,3 @@
-all:
-  - scout
-  - planner
-  - builder
-  - reviewer
-  - documenter
-  - red-team
-  - pi-docs-expert
-  - bowser
-  - plan-reviewer
-  - flowchart
-  - mermaid
-  - tester
-
 pi-pi full:
   - pi-pi/ext-expert
   - pi-pi/theme-expert
@@ -25,9 +11,12 @@ pi-pi full:
   - pi-pi/pi-orchestrator
   - builder
 
-fast-pi-mvp:
+fast-mvp:
+  - architect
   - researcher
   - builder
+  - reviewer
+
 
 n8n-team:
   - n8n/n8n-builder
@@ -37,20 +26,8 @@ agent experts:
   - pi-pi/agent-expert
   - builder
 
-video-production:
-  - video/video-producer
-  - n8n/n8n-builder
-  - researcher
 
 video-production-mvp:
   - video/video-producer
-  - researcher
-  - builder
-
-
-video-production-full:
-  - video/video-producer
-  - n8n/n8n-builder
-  - n8n/n8n-arquitecture
   - researcher
   - builder

@@ -864,7 +864,7 @@ ${agentCatalog}`,
 		}
 
 		// Lock down to dispatcher-only (tool already registered at top level)
-		pi.setActiveTools(["dispatch_agent"]);
+		pi.setActiveTools(["dispatch_agent", "tilldone"]);
 
 		// Register shortcuts from .pi/agents/shortcuts.yaml
 		// YAML defines keys (f6, f8), code defines actions (next-team, prev-team)
