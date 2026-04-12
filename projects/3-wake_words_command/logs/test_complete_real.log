@@ -1,0 +1,31 @@
+2026-04-12 10:18:59 | INFO     | ============================================================
+2026-04-12 10:18:59 | INFO     | SISTEMA WAKE WORDS - INICIALIZANDO
+2026-04-12 10:18:59 | INFO     | ============================================================
+2026-04-12 10:18:59 | INFO     | 🖥️  CPU: 32 núcleos (16 físicos)
+2026-04-12 10:18:59 | INFO     | 🧠 RAM: 63.92 GB total (16.91 GB usados, 26.5%)
+2026-04-12 10:18:59 | INFO     | 💾 Disco: 930.67 GB total (747.44 GB usados)
+2026-04-12 10:18:59 | INFO     | ------------------------------------------------------------
+2026-04-12 10:18:59 | INFO     | [AUDIO_FRAME] #    1 | Amp:0.000244 | RMS:0.000114 | Samples:  512 | Status:SILENCE | Bar:[░░░░░░░░░░░░░░░░░░░░]
+2026-04-12 10:18:59 | INFO     | [AUDIO_FRAME] #    2 | Amp:0.002625 | RMS:0.001543 | Samples:  512 | Status:SILENCE | Bar:[█░░░░░░░░░░░░░░░░░░░]
+2026-04-12 10:18:59 | INFO     | [AUDIO_FRAME] #    3 | Amp:0.008118 | RMS:0.003633 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:00 | INFO     | [AUDIO_FRAME] #    4 | Amp:0.010071 | RMS:0.005527 | Samples:  512 | Status:VOICE   | Bar:[█████░░░░░░░░░░░░░░░]
+2026-04-12 10:19:00 | INFO     | [AUDIO_FRAME] #    5 | Amp:0.007538 | RMS:0.004558 | Samples:  512 | Status:SILENCE | Bar:[███░░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:00 | INFO     | [AUDIO_FRAME] #    6 | Amp:0.008942 | RMS:0.004874 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:00 | INFO     | [AUDIO_FRAME] #    7 | Amp:0.007904 | RMS:0.004626 | Samples:  512 | Status:SILENCE | Bar:[███░░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:00 | INFO     | [AUDIO_FRAME] #    8 | Amp:0.010834 | RMS:0.004898 | Samples:  512 | Status:VOICE   | Bar:[█████░░░░░░░░░░░░░░░]
+2026-04-12 10:19:00 | INFO     | [AUDIO_FRAME] #    9 | Amp:0.008575 | RMS:0.005313 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:01 | INFO     | [AUDIO_FRAME] #   10 | Amp:0.008667 | RMS:0.004508 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:01 | INFO     | [AUDIO_FRAME] #   11 | Amp:0.008026 | RMS:0.004700 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:01 | INFO     | [AUDIO_FRAME] #   12 | Amp:0.007812 | RMS:0.004380 | Samples:  512 | Status:SILENCE | Bar:[███░░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:01 | INFO     | [AUDIO_FRAME] #   13 | Amp:0.008820 | RMS:0.004966 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:01 | INFO     | [AUDIO_FRAME] #   14 | Amp:0.008331 | RMS:0.004828 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:01 | INFO     | [AUDIO_FRAME] #   15 | Amp:0.009003 | RMS:0.004999 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:01 | INFO     | [AUDIO_FRAME] #   16 | Amp:0.009094 | RMS:0.005149 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:02 | INFO     | [AUDIO_FRAME] #   17 | Amp:0.009460 | RMS:0.005459 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:02 | INFO     | [AUDIO_FRAME] #   18 | Amp:0.010040 | RMS:0.005207 | Samples:  512 | Status:VOICE   | Bar:[█████░░░░░░░░░░░░░░░]
+2026-04-12 10:19:02 | INFO     | [AUDIO_FRAME] #   19 | Amp:0.008484 | RMS:0.005014 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:02 | INFO     | [AUDIO_FRAME] #   20 | Amp:0.008026 | RMS:0.004478 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:02 | INFO     | [AUDIO_FRAME] #   21 | Amp:0.007172 | RMS:0.003952 | Samples:  512 | Status:SILENCE | Bar:[███░░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:02 | INFO     | [AUDIO_FRAME] #   22 | Amp:0.008606 | RMS:0.005321 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:03 | INFO     | [AUDIO_FRAME] #   23 | Amp:0.008911 | RMS:0.005424 | Samples:  512 | Status:SILENCE | Bar:[████░░░░░░░░░░░░░░░░]
+2026-04-12 10:19:03 | INFO     | [AUDIO_FRAME] #   24 | Amp:0.007965 | RMS:0.005027 | Samples:  512 | Status:SILENCE | Bar:[███░░░░░░░░░░░░░░░░░]
