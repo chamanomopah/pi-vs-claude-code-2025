@@ -222,41 +222,6 @@ export default function (pi: ExtensionAPI) {
 	let contextWindow = 0;
 	let clearAgentsSession = true;  // DEFAULT: true (auto-clear ligado)
 
-	// Active Agents Stack (LIFO)
-	type ActiveAgent = {
-		name: string;
-		process: any;
-		state: AgentState;
-		startTime: number;
-	};
-	const activeAgentsStack: ActiveAgent[] = [];
-
-	function killMostRecentAgent(ctx: any): boolean {
-		if (activeAgentsStack.length === 0) {
-			ctx.ui.notify("No active agents to terminate", "warning");
-			return false;
-		}
-		const recent = activeAgentsStack.pop()!;
-		const { name, process, state, startTime } = recent;
-		try {
-			process.kill("SIGTERM");
-			setTimeout(() => {
-				try { process.kill("SIGKILL"); } catch {}
-			}, 3000);
-			state.status = "error";
-			state.lastWork = "Terminated by user (ESC)";
-			state.elapsed = Date.now() - startTime;
-			if (state.timer) clearInterval(state.timer);
-			updateWidget();
-			const elapsedSec = Math.round(state.elapsed / 1000);
-			ctx.ui.notify("Terminated: " + displayName(name) + " (" + elapsedSec + "s)", "warning");
-			return true;
-		} catch (err) {
-			ctx.ui.notify("Failed to terminate " + displayName(name) + ": " + err, "error");
-			return false;
-		}
-	}
-
 	function loadAgents(cwd: string) {
 		// Create session storage dir
 		sessionDir = join(cwd, ".pi", "agent-sessions");
@@ -534,15 +499,6 @@ export default function (pi: ExtensionAPI) {
 				env: { ...process.env },
 			});
 
-			// Add to active agents stack
-			const agentEntry: ActiveAgent = {
-				name: state.def.name,
-				process: proc,
-				state,
-				startTime,
-			};
-			activeAgentsStack.push(agentEntry);
-
 			let buffer = "";
 
 			proc.stdout!.setEncoding("utf-8");
@@ -591,10 +547,6 @@ export default function (pi: ExtensionAPI) {
 			});
 
 			proc.on("close", (code) => {
-			// Remove from active agents stack if present
-			const idx = activeAgentsStack.findIndex(a => a.name === state.def.name);
-			if (idx >= 0) activeAgentsStack.splice(idx, 1);
-
 				if (buffer.trim()) {
 					try {
 						const event = JSON.parse(buffer);
@@ -655,10 +607,6 @@ export default function (pi: ExtensionAPI) {
 			});
 
 			proc.on("error", (err) => {
-			// Remove from active agents stack
-			const idx = activeAgentsStack.findIndex(a => a.name === state.def.name);
-			if (idx >= 0) activeAgentsStack.splice(idx, 1);
-
 				clearInterval(state.timer);
 				state.status = "error";
 				state.lastWork = `Error: ${err.message}`;
@@ -998,14 +946,8 @@ ${agentCatalog}`,
 					updateWidget();
 				},
 			},
-			"kill-recent-agent": {
-				description: "Terminate the most recently started agent (ESC)",
-				handler: async (ctx) => {
-					if (!ctx.hasUI) return;
-					killMostRecentAgent(ctx);
-				},
-			},
 		}, _ctx.cwd);
+
 		_ctx.ui.setStatus("agent-team", `Team: ${activeTeamName} (${agentStates.size})`);
 		const members = Array.from(agentStates.values()).map(s => displayName(s.def.name)).join(", ");
 		_ctx.ui.notify(

@@ -1,22 +1,8 @@
-pi-pi full:
-  - pi-pi/ext-expert
-  - pi-pi/theme-expert
-  - pi-pi/skill-expert
-  - pi-pi/config-expert
-  - pi-pi/tui-expert
-  - pi-pi/prompt-expert
-  - pi-pi/agent-expert
-  - pi-pi/cli-expert
-  - pi-pi/keybinding-expert
-  - pi-pi/pi-orchestrator
-  - builder
-
 fast-mvp:
   - architect
   - researcher
   - builder
   - reviewer
-
 
 n8n-team:
   - n8n/n8n-builder
@@ -31,3 +17,17 @@ video-production-mvp:
   - video/video-producer
   - researcher
   - builder
+
+pi-pi full:
+  - pi-pi/ext-expert
+  - pi-pi/theme-expert
+  - pi-pi/skill-expert
+  - pi-pi/config-expert
+  - pi-pi/tui-expert
+  - pi-pi/prompt-expert
+  - pi-pi/agent-expert
+  - pi-pi/cli-expert
+  - pi-pi/keybinding-expert
+  - pi-pi/pi-orchestrator
+  - builder
+

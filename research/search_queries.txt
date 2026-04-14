@@ -1,0 +1,10 @@
+E2E validation philosophy AI agents black-box testing principles
+local voice agent testing audio loopback without Twilio phone infrastructure
+pragmatic end-to-end testing practical approaches local validation
+adaptive validation framework testing Python scripts execution
+testing in production philosophy E2E validation best practices
+local STT TTS Whisper pyttsx3 vs cloud APIs voice testing
+audio loopback testing speaker output microphone input validation
+coding agents test generated scripts execution validation
+volatile validation adaptive testing context-aware
+GitHub voice agent testing local examples open-source

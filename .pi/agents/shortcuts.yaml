@@ -29,9 +29,10 @@
 # ────────────────────────────────────────────────────────────────────────────────
 agent-team:
   - f6              # next-team (Cycle to next team)
-  - f7     # prev-team (Cycle to previous team)
+  - f7              # prev-team (Cycle to previous team)
   - f5              # agent-team-reload (Reload agent definitions from disk)
   - f10             # toggle-auto-clear (Toggle auto-clear agent sessions)
+  - escape          # kill-recent-agent (Terminate most recent agent - press multiple times to kill all)
 
 # ────────────────────────────────────────────────────────────────────────────────
 # Theme Cycler Extension (extensions/theme-cycler.ts)
