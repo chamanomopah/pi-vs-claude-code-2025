@@ -1,4 +1,4 @@
-quero que crie um agente script writer & um agente script reseacher e montar um script team
+quero que crie um agente script writer & um agente script reseacher (script team)
 
 contexto:
 

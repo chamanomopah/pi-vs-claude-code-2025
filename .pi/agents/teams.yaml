@@ -12,7 +12,6 @@ agent experts:
   - pi-pi/agent-expert
   - builder
 
-
 video-production-mvp:
   - video/video-producer
   - researcher
@@ -31,3 +30,6 @@ pi-pi full:
   - pi-pi/pi-orchestrator
   - builder
 
+script-team:
+  - video/script-writer
+  - video/script-researcher
