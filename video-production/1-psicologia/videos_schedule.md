@@ -1,6 +1,3 @@
-titulo: 
-- Psychology of BLACK People
-- Psychology of African Americans
 
 1. `Psychology of BLACK People Who Treat Their Birthday Like a Normal` (10 MIN)
 
