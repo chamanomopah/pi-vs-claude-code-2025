@@ -6,6 +6,10 @@ https://youtu.be/QWIxFghgrS0?si=3FRSv30UHwZ-1C3Y
 ## personagem
 nome: Drake
 
+## publico 
+
+ideia é trazer pra o publico negro a ideia de empatia por algo que o que foi passado por eles, e passar muito mais como um exemplo de vida 
+
 o canal vai ser em ingles 
 
 O que estou ganhando:

@@ -1,0 +1,150 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                   EXEMPLOS PRÁTICOS CRIADOS - RESUMO                          ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+📁 ESTRUTURA DE ARQUIVOS:
+
+examples/
+├── kokoro_tts/                     🎤 KOKORO TTS (6 arquivos)
+│   ├── exemplo1_curl_simple.sh      # cURL: Texto simples em português
+│   ├── exemplo1_python_simple.py    # Python: Texto simples em português
+│   ├── exemplo2_curl_batch.sh       # cURL: Batch de 3 textos
+│   ├── exemplo2_python_batch.py     # Python: Batch de 3 textos
+│   ├── exemplo3_curl_upload.sh      # cURL: Upload de áudio de referência
+│   └── exemplo3_python_upload.py    # Python: Upload de áudio de referência
+│
+├── zimage_turbo/                    🖼️ Z-IMAGE-TURBO (6 arquivos)
+│   ├── exemplo1_curl_simple.sh      # cURL: Texto para imagem simples
+│   ├── exemplo1_python_simple.py    # Python: Texto para imagem simples
+│   ├── exemplo2_curl_batch.sh       # cURL: Batch de 3 prompts
+│   ├── exemplo2_python_batch.py     # Python: Batch de 3 prompts
+│   ├── exemplo3_curl_img2img.sh     # cURL: Upload imagem + img2img
+│   └── exemplo3_python_img2img.py   # Python: Upload imagem + img2img
+│
+├── fix_encoding.py                  # Script auxiliar para corrigir encoding
+├── README.md                        # Documentação completa
+└── RESUMO.txt                       # Este arquivo
+
+══════════════════════════════════════════════════════════════════════════════
+
+✅ TOTAL: 13 ARQUIVOS CRIADOS
+
+   6 scripts cURL/bash (.sh)
+   6 scripts Python (.py)
+   1 arquivo de documentação (README.md)
+   1 arquivo de resumo (RESUMO.txt)
+
+══════════════════════════════════════════════════════════════════════════════
+
+🎤 KOKORO TTS - EXEMPLOS:
+
+   Exemplo 1 - Texto Simples:
+   • Texto: "Olá, mundo! Este é um teste de automação do Kokoro TTS."
+   • Speaker: am_onyx
+   • Velocidade: 1.0 (normal)
+   • Idioma: Portuguese
+   • Output: Áudio salvo automaticamente
+
+   Exemplo 2 - Batch de Textos:
+   • 3 textos diferentes processados sequencialmente
+   • Cada texto gera um arquivo separado
+   • Nomes organizados: audio_0_..., audio_1_..., audio_2_...
+
+   Exemplo 3 - Upload de Áudio:
+   • Demonstra upload de áudio de referência
+   • NOTA: Workflow atual usa speakers pré-definidos
+   • Mostra estrutura necessária para voice cloning
+
+══════════════════════════════════════════════════════════════════════════════
+
+🖼️ Z-IMAGE-TURBO - EXEMPLOS:
+
+   Exemplo 1 - Texto para Imagem:
+   • Prompt: "Um gato astronauta flutuando no espaço..."
+   • Dimensões: 1024x1024
+   • Steps: 8 (rápido)
+   • Output: Imagem PNG salva automaticamente
+
+   Exemplo 2 - Batch de Prompts:
+   • 3 prompts diferentes:
+     1. Dragão de cristal sobre montanhas nevadas
+     2. Robô em cafeteria futurista
+     3. Floresta mágica com fadas
+   • Cada prompt gera uma imagem separada
+
+   Exemplo 3 - Upload de Imagem (img2img):
+   • Demonstra upload de imagem de referência
+   • NOTA: Workflow atual é Text-to-Image
+   • Mostra estrutura necessária para img2img
+
+══════════════════════════════════════════════════════════════════════════════
+
+📋 CARACTERÍSTICAS DE TODOS OS EXEMPLOS:
+
+   ✅ cURL/bash:
+   • Comandos completos e funcionais
+   • Headers corretos (Content-Type: application/json)
+   • JSON formatado corretamente
+   • client_id único para cada exemplo
+   • Comentários explicando cada parâmetro
+   • Loop de espera para processamento
+   • Download automático de outputs
+
+   ✅ Python:
+   • Código completo e funcional
+   • Importa do utils.py existente
+   • Conexão WebSocket para monitoramento
+   • Upload de inputs (quando aplicável)
+   • Download automático de outputs
+   • Salva em: user/outputs/{data}/{exemplo}/
+   • Tratamento de erros
+   • Docstrings explicativas
+   • Print de progresso
+   • Fix de encoding UTF-8 para Windows
+
+══════════════════════════════════════════════════════════════════════════════
+
+🚀 USO RÁPIDO:
+
+   # KOKORO TTS - Exemplo 1
+   cd examples/kokoro_tts
+   bash exemplo1_curl_simple.sh
+   python exemplo1_python_simple.py
+
+   # Z-IMAGE-TURBO - Exemplo 1
+   cd examples/zimage_turbo
+   bash exemplo1_curl_simple.sh
+   python exemplo1_python_simple.py
+
+══════════════════════════════════════════════════════════════════════════════
+
+📁 LOCALIZAÇÃO DOS OUTPUTS:
+
+   ComfyUI/user/outputs/
+   └── YYYY-MM-DD/                 # Data de geração
+       ├── kokoro_tts/
+       │   ├── exemplo1_simples/
+       │   ├── exemplo2_batch/
+       │   └── exemplo3_upload/
+       └── zimage_turbo/
+           ├── exemplo1_simples/
+           ├── exemplo2_batch/
+           └── exemplo3_img2img/
+
+══════════════════════════════════════════════════════════════════════════════
+
+📚 DOCUMENTAÇÃO:
+
+   Veja README.md para documentação completa com:
+   • Descrição detalhada de cada exemplo
+   • Requisitos
+   • Instruções de uso
+   • Troubleshooting
+   • Personalização
+   • Referências
+
+══════════════════════════════════════════════════════════════════════════════
+
+✨ TODOS OS ARQUIVOS SÃO "COPIAR E COLAR" PRONTOS PARA USO!
+
+══════════════════════════════════════════════════════════════════════════════
