@@ -1,0 +1,164 @@
+{
+  "research_metadata": {
+    "title": "SSH Node do n8n - Pesquisa Completa",
+    "date": "2026-04-25",
+    "researcher": "Agente de Pesquisa Tavily MCP",
+    "focus": "SSH node do n8n com foco em ambiente Windows",
+    "status": "COMPLETED",
+    "duration_hours": 4
+  },
+  
+  "objectives": [
+    "O que é o SSH node do n8n - funcionamento básico e casos de uso",
+    "Configuração no Windows - como configurar e usar o nó SSH em PC Windows",
+    "Boas práticas - segurança, autenticação, gerenciamento de credenciais",
+    "Comandos úteis e simples - exemplos de comandos SSH comuns",
+    "Dicas práticas - troubleshooting, erros comuns e soluções",
+    "Exemplos de workflows - casos de uso práticos do nó SSH em automações"
+  ],
+  
+  "documents_created": [
+    {
+      "name": "ssh-node-research.md",
+      "path": "docs/boas-praticas/n8n/nodes/ssh-node-research.md",
+      "size_kb": 8.1,
+      "type": "complete_guide",
+      "sections": 7
+    },
+    {
+      "name": "ssh-node-resumo.md",
+      "path": "docs/boas-praticas/n8n/nodes/ssh-node-resumo.md",
+      "size_kb": 5.0,
+      "type": "executive_summary"
+    },
+    {
+      "name": "ssh-quick-reference.md",
+      "path": "docs/boas-praticas/n8n/nodes/ssh-quick-reference.md",
+      "size_kb": 3.2,
+      "type": "quick_reference"
+    },
+    {
+      "name": "ssh-node-n8n-index.md",
+      "path": "docs/research/ssh-node-n8n-index.md",
+      "size_kb": 5.7,
+      "type": "research_index"
+    }
+  ],
+  
+  "total_documentation_size_kb": 22.0,
+  
+  "coverage": {
+    "topics_covered": 6,
+    "subtopics": 42,
+    "commands_documented": 40,
+    "errors_solved": 6,
+    "workflow_examples": 7,
+    "sources_consulted": 18
+  },
+  
+  "key_findings": [
+    "PowerShell como shell padrão do OpenSSH é CRUCIAL para Windows",
+    "Working Directory deve ser {{null}} para evitar erros de sintaxe",
+    "N8N_ENCRYPTION_KEY é obrigatório para credenciais persistentes",
+    "Autenticação por chave + passphrase = máxima segurança",
+    "OpenSSH nativo do Windows pode ter limitações"
+  ],
+  
+  "sources_breakdown": {
+    "official_documentation": 3,
+    "security_articles": 4,
+    "community_threads": 6,
+    "github_issues": 2,
+    "workflow_templates": 3
+  },
+  
+  "commands_breakdown": {
+    "windows_powershell": 20,
+    "linux_bash": 15,
+    "multi_platform": 5
+  },
+  
+  "workflow_examples": [
+    "Monitoramento de VPS (15 min)",
+    "Auto-Update Windows Server (semanal)",
+    "Limpeza de Logs Automática (diário)",
+    "Backup de Configurações (semanal)",
+    "Health Check com Alertas (hora)",
+    "Deploy Docker via SSH (on-demand)",
+    "Multi-Server Command Execution (bulk)"
+  ],
+  
+  "errors_documented": [
+    "Cannot parse privateKey",
+    "The filename, directory name, or volume label syntax is incorrect",
+    "All configured authentication methods failed",
+    "ECONNREFUSED / Connection refused",
+    "Permission denied (file operations)",
+    "Performance lenta"
+  ],
+  
+  "recommendations_by_level": {
+    "beginner": [
+      "Comece com comandos simples (hostname, uptime)",
+      "Teste comandos manualmente antes de automatizar",
+      "Use senhas apenas para testes",
+      "Implemente error handling gradualmente"
+    ],
+    "intermediate": [
+      "Migre para autenticação por chave",
+      "Configure N8N_ENCRYPTION_KEY",
+      "Use sub-workflows para complexidade",
+      "Implemente monitoramento e alertas"
+    ],
+    "advanced": [
+      "Logging detalhado e auditoria",
+      "Execução paralela de servidores",
+      "Princípio do menor privilégio",
+      "Automação de rotação de credenciais"
+    ]
+  },
+  
+  "next_steps": [
+    "Estudar o guia completo (ssh-node-research.md)",
+    "Configurar ambiente de desenvolvimento",
+    "Testar comandos manualmente",
+    "Implementar workflows de exemplo",
+    "Documentar casos de uso específicos do projeto",
+    "Criar templates reutilizáveis",
+    "Compartilhar conhecimento com a equipe"
+  ],
+  
+  "official_references": [
+    "https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.ssh/",
+    "https://docs.n8n.io/integrations/builtin/credentials/ssh/",
+    "https://n8n.io/integrations/ssh/",
+    "https://community.n8n.io/"
+  ],
+  
+  "skills_used": [
+    "tavily_search",
+    "web_research",
+    "technical_documentation",
+    "troubleshooting_guides",
+    "workflow_design"
+  ],
+  
+  "tags": [
+    "n8n",
+    "ssh",
+    "windows",
+    "openssh",
+    "powershell",
+    "automation",
+    "devops",
+    "security",
+    "workflows",
+    "troubleshooting"
+  ],
+  
+  "language": "pt-BR",
+  
+  "version": "1.0.0",
+  
+  "last_updated": "2026-04-25T11:18:00-03:00"
+}

@@ -18,7 +18,9 @@ docs/boas-praticas/n8n/
 ├── nodes/             # Documentação de nodes específicos
 │   ├── http-request.md
 │   ├── if-switch.md
-│   └── webhook.md
+│   ├── webhook.md
+│   ├── ssh-node-research.md    # [NOVO] Pesquisa completa SSH node
+│   └── ssh-node-resumo.md      # [NOVO] Resumo executivo SSH
 └── custom/            # Convenções personalizadas
     ├── minhas-convencoes.md
     └── integracoes-especificas.md
@@ -44,6 +46,8 @@ docs/boas-praticas/n8n/
 /n8n-load-boas-praticas split-in-batches
 /n8n-load-boas-praticas loop-simples
 /n8n-load-boas-praticas http-request
+/n8n-load-boas-praticas ssh-node-research    # [NOVO]
+/n8n-load-boas-praticas ssh-node-resumo      # [NOVO]
 ```
 
 ## 📚 Conteúdo
@@ -105,6 +109,23 @@ docs/boas-praticas/n8n/
   - Response modes
   - Autenticação
   - CORS
+
+- **ssh-node-research.md** 🆕 - Pesquisa completa sobre SSH node
+  - O que é e como funciona
+  - Configuração no Windows
+  - Boas práticas de segurança
+  - Comandos úteis (Windows e Linux)
+  - Troubleshooting completo
+  - 7 exemplos de workflows práticos
+  - Referências e fontes
+
+- **ssh-node-resumo.md** 🆕 - Resumo executivo SSH node
+  - Visão geral rápida
+  - Checklist de configuração Windows
+  - Erros comuns e soluções
+  - Comandos mais utilizados
+  - 5 exemplos de workflows
+  - Dicas de performance
 
 ### Custom (Convenções Personalizadas)
 
@@ -207,10 +228,14 @@ find docs/boas-praticas/n8n/ -name "*.md"
 - **Merge**: Ver `core/merge-nodes.md`, `patterns/branches-paralelos.md`
 - **HTTP**: Ver `nodes/http-request.md`
 - **Webhook**: Ver `nodes/webhook.md`
+- **SSH**: Ver `nodes/ssh-node-research.md`, `nodes/ssh-node-resumo.md` 🆕
 - **Condições**: Ver `nodes/if-switch.md`
 - **Erros**: Ver `patterns/loop-com-erro.md`
 - **Paralelismo**: Ver `core/loops.md`, `patterns/branches-paralelos.md`
 - **Dados**: Ver `core/fluxo-dados.md`
+- **Segurança**: Ver `nodes/ssh-node-research.md#segurança` 🆕
+- **Windows**: Ver `nodes/ssh-node-resumo.md#windows` 🆕
+- **Troubleshooting**: Ver `nodes/ssh-node-research.md#erros` 🆕
 
 ### Casos de Uso
 
@@ -220,6 +245,36 @@ find docs/boas-praticas/n8n/ -name "*.md"
 - **Receber webhook**: `nodes/webhook.md`
 - **Branching**: `nodes/if-switch.md`
 - **Sincronizar**: `core/merge-nodes.md`
+- **Automatizar servidor**: `nodes/ssh-node-resumo.md` 🆕
+- **Deploy remoto**: `nodes/ssh-node-research.md#exemplos` 🆕
+- **Monitoramento**: `nodes/ssh-node-resumo.md#exemplos` 🆕
+
+## 🆕 Novidades (25/04/2026)
+
+### SSH Node - Documentação Completa
+
+Adicionada documentação abrangente sobre o SSH node do n8n com foco em ambiente Windows:
+
+**Documentos Adicionados:**
+- `ssh-node-research.md` - Guia completo (8KB)
+- `ssh-node-resumo.md` - Resumo executivo (5KB)
+
+**Conteúdo Coberto:**
+✅ O que é o SSH node e suas operações
+✅ Configuração completa no Windows (OpenSSH, PowerShell)
+✅ Autenticação por senha e chave privada
+✅ Boas práticas de segurança (N8N_ENCRYPTION_KEY, chaves SSH)
+✅ Comandos úteis para Windows e Linux
+✅ Troubleshooting de 6 erros comuns
+✅ 7 exemplos de workflows práticos
+✅ Referências e fontes oficiais
+
+**Principais Destaques:**
+- Configuração do PowerShell como shell padrão do OpenSSH
+- Solução para erro de "Working Directory" no Windows
+- Comandos PowerShell para gerenciamento de servidores
+- Workflows de monitoramento, deploy e backup
+- Checklist de segurança e hardening do n8n
 
 ## 🤝 Contribuir
 
@@ -242,5 +297,5 @@ Para adicionar novas boas práticas:
 
 ---
 
-**Última atualização:** 2025-04-08  
-**Versão:** 2.0.0 (estrutura em pastas)
+**Última atualização:** 2026-04-25  
+**Versão:** 2.1.0 (adicionada documentação SSH node)
